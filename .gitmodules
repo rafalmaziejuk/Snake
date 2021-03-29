@@ -1,0 +1,12 @@
+[submodule "Snake/vendor/glfw"]
+	path = Snake/vendor/glfw
+	url = https://github.com/glfw/glfw
+	branch = master
+[submodule "Snake/vendor/glm"]
+	path = Snake/vendor/glm
+	url = https://github.com/g-truc/glm
+	branch = master
+[submodule "Snake/vendor/imgui"]
+	path = Snake/vendor/imgui
+	url = https://github.com/ocornut/imgui
+	branch = master
