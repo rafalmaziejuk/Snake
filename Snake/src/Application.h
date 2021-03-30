@@ -5,28 +5,23 @@
 #include <string>
 #include <cstdint>
 
-namespace Snake
+class Application
 {
+private:
+	GLFWwindow *m_window;
+	std::string m_name;
+	uint16_t m_width;
+	uint16_t m_height;
+	float m_timestep = 0.0f;
+	float m_lastFrameTime = 0.0f;
 
-	class Application
-	{
-	private:
-		GLFWwindow *m_window;
-		std::string m_name;
-		uint16_t m_width;
-		uint16_t m_height;
-		float m_timestep = 0.0f;
-		float m_lastFrameTime = 0.0f;
+private:
+	Application(const Application &app) = delete;
+	Application & operator=(const Application &app) = delete;
 
-	private:
-		Application(const Application &app) = delete;
-		Application & operator=(const Application &app) = delete;
+public:
+	Application(const std::string &name, uint16_t width, uint16_t height);
+	~Application(void);
 
-	public:
-		Application(const std::string &name, uint16_t width, uint16_t height);
-		~Application(void);
-
-		void run(void);
-	};
-
-}
+	void run(void);
+};
