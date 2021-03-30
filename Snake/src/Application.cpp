@@ -20,7 +20,8 @@ Application::Application(const std::string &name, uint16_t width, uint16_t heigh
 	m_window(nullptr),
 	m_name(name),
 	m_width(width),
-	m_height(height)
+	m_height(height),
+	m_stateManager(State::Context(width, height))
 {
 	assert(glfwInit());
 
@@ -39,6 +40,7 @@ Application::Application(const std::string &name, uint16_t width, uint16_t heigh
 	glViewport(0, 0, m_width, m_height);
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
 }
 
 Application::~Application(void)
@@ -58,7 +60,6 @@ void Application::run(void)
 		handle_input(m_window);
 		//update
 
-		glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
 
 		//render

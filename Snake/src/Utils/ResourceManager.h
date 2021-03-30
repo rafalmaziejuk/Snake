@@ -9,6 +9,16 @@
 class ResourceManager
 {
 private:
+	static ResourceManager *m_instance;
+
+	ResourceManager(void) = default;
+	ResourceManager(const ResourceManager &manager) = delete;
+	ResourceManager & operator=(const ResourceManager &manager) = delete;
+
+public:
+	static ResourceManager & get_instance(void);
+
+private:
 	std::map<std::string, std::shared_ptr<Shader>> m_shaders;
 	std::map<std::string, std::shared_ptr<Texture>> m_textures;
 

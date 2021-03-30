@@ -1,5 +1,8 @@
 #pragma once
 
+#include "Utils/ResourceManager.h"
+#include "Utils/StateManager.h"
+
 #include <GLFW/glfw3.h>
 
 #include <string>
@@ -12,6 +15,11 @@ private:
 	std::string m_name;
 	uint16_t m_width;
 	uint16_t m_height;
+
+private:
+	StateManager m_stateManager;
+
+private:
 	float m_timestep = 0.0f;
 	float m_lastFrameTime = 0.0f;
 
