@@ -1,15 +1,5 @@
 #include "ResourceManager.h"
 
-ResourceManager * ResourceManager::m_instance = nullptr;
-
-ResourceManager & ResourceManager::get_instance(void)
-{
-	if (m_instance == nullptr)
-		m_instance = new ResourceManager();
-
-	return *m_instance;
-}
-
 void ResourceManager::load_shader(const std::string &name, const std::string &vert, const std::string &frag)
 {
 	std::shared_ptr<Shader> shader = std::make_shared<Shader>(vert, frag);
@@ -24,10 +14,16 @@ void ResourceManager::load_texture(const std::string &name, const std::string &f
 
 std::shared_ptr<Shader> ResourceManager::get_shader(const std::string &name)
 {
-	return m_shaders[name];
+	auto shader = m_shaders.find(name);
+	assert(shader != m_shaders.end());
+
+	return shader->second;
 }
 
 std::shared_ptr<Texture> ResourceManager::get_texture(const std::string &name)
 {
-	return m_textures[name];
+	auto texture = m_textures.find(name);
+	assert(texture != m_textures.end());
+
+	return texture->second;
 }

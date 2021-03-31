@@ -8,7 +8,6 @@
 Texture::Texture(const std::string &filepath)
 {
 	int width, height, channels;
-	stbi_set_flip_vertically_on_load(1);
 	stbi_uc *data = stbi_load(filepath.c_str(), &width, &height, &channels, 0);
 	assert(data);
 
@@ -23,10 +22,21 @@ Texture::Texture(const std::string &filepath)
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 
+	GLenum internalFormat = 0;
+	GLenum dataFormat = 0;
+
 	if (channels == 3)
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+	{
+		internalFormat = GL_RGB8;
+		dataFormat = GL_RGB;
+	}
 	else if (channels == 4)
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+	{
+		internalFormat = GL_RGBA8;
+		dataFormat = GL_RGBA;
+	}
+
+	glTexImage2D(GL_TEXTURE_2D, 0, internalFormat, width, height, 0, dataFormat, GL_UNSIGNED_BYTE, data);
 
 	glGenerateMipmap(GL_TEXTURE_2D);
 
