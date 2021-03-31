@@ -52,7 +52,7 @@ public:
 
 	void render(void);
 	void update(float timestep);
-	void handle_input(float timestep);
+	void handle_input(void);
 
 	void add_state(ID stateID);
 	void delete_state(void);

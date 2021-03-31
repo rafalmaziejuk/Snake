@@ -55,11 +55,11 @@ void StateManager::update(float timestep)
 	do_pending_actions();
 }
 
-void StateManager::handle_input(float timestep)
+void StateManager::handle_input(void)
 {
 	for (auto &state : m_states)
 	{
-		if (!state->handle_input(timestep))
+		if (!state->handle_input())
 			break;
 	}
 

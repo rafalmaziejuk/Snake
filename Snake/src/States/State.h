@@ -40,5 +40,5 @@ public:
 
 	virtual void draw(void) const = 0;
 	virtual bool update(float timestep) = 0;
-	virtual bool handle_input(float timestep) = 0;
+	virtual bool handle_input(void) = 0;
 };

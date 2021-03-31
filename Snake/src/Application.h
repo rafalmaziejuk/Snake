@@ -11,9 +11,6 @@
 class Application
 {
 private:
-	static const float TIME_PER_FRAME;
-
-private:
 	GLFWwindow *m_window;
 	std::string m_name;
 	uint16_t m_width;
@@ -21,10 +18,6 @@ private:
 
 private:
 	StateManager m_stateManager;
-
-private:
-	float m_timestep = 0.0f;
-	float m_lastFrameTime = 0.0f;
 
 private:
 	Application(const Application &app) = delete;

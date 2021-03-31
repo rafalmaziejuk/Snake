@@ -1,12 +1,14 @@
 #include "Application.h"
+#include "Utils/InputManager.h"
 #include "States/StateIdentifiers.h"
+#include "States/MenuState.h"
+#include "States/GameState.h"
+#include "States/GameoverState.h"
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
 #include <cassert>
-
-const float Application::TIME_PER_FRAME = 1.0f / 60.0f;
 
 static void resize_callback(GLFWwindow *window, GLint width, GLint height)
 {
@@ -15,7 +17,16 @@ static void resize_callback(GLFWwindow *window, GLint width, GLint height)
 
 static void key_callback(GLFWwindow *window, int key, int scancode, int action, int mode)
 {
-	
+	switch (action)
+	{
+		case GLFW_PRESS:
+			InputManager::get_instance().key_press(key);
+			break;
+
+		case GLFW_RELEASE:
+			InputManager::get_instance().key_release(key);
+			break;
+	}
 }
 
 Application::Application(const std::string &name, uint16_t width, uint16_t height) :
@@ -37,6 +48,7 @@ Application::Application(const std::string &name, uint16_t width, uint16_t heigh
 
 	glfwMakeContextCurrent(m_window);
 	glfwSetFramebufferSizeCallback(m_window, resize_callback);
+	glfwSetKeyCallback(m_window, key_callback);
 
 	assert(gladLoadGLLoader((GLADloadproc)glfwGetProcAddress));
 	glViewport(0, 0, m_width, m_height);
@@ -44,8 +56,8 @@ Application::Application(const std::string &name, uint16_t width, uint16_t heigh
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
 
-	//register_states();
-	//m_stateManager.add_state(ID::MENU_STATE);
+	register_states();
+	m_stateManager.add_state(ID::GAME_STATE);
 }
 
 Application::~Application(void)
@@ -55,9 +67,9 @@ Application::~Application(void)
 
 void Application::register_states(void)
 {
-	/*m_stateManager.register_state<MenuState>(ID::MENU_STATE);
-	m_stateManager.register_state<GameState>(ID::MENU_STATE);
-	m_stateManager.register_state<GameoverState>(ID::MENU_STATE);*/
+	m_stateManager.register_state<MenuState>(ID::MENU_STATE);
+	m_stateManager.register_state<GameState>(ID::GAME_STATE);
+	m_stateManager.register_state<GameoverState>(ID::GAMEOVER_STATE);
 }
 
 void Application::run(void)
@@ -66,23 +78,19 @@ void Application::run(void)
 
 	while (!glfwWindowShouldClose(m_window))
 	{
-		float elapsedTime = (float)glfwGetTime() - m_lastFrameTime;
-		timeSinceLastUpdate += elapsedTime;
+		float time = (float)glfwGetTime();
+		float timestep = time - timeSinceLastUpdate;
+		timeSinceLastUpdate = time;
 
-		while (timeSinceLastUpdate > TIME_PER_FRAME)
-		{
-			timeSinceLastUpdate -= TIME_PER_FRAME;
+		glfwPollEvents();
+		m_stateManager.handle_input();
+		m_stateManager.update(timestep);
 
-			glfwPollEvents();
-			//input
-			//m_stateManager.update(m_timestep);
-
-			//if (m_stateManager.is_empty())
-				//glfwSetWindowShouldClose(m_window, 1);
-		}
+		if (m_stateManager.is_empty())
+			glfwSetWindowShouldClose(m_window, 1);
 
 		glClear(GL_COLOR_BUFFER_BIT);
-		//m_stateManager.render();
+		m_stateManager.render();
 		glfwSwapBuffers(m_window);
 	}
 }
