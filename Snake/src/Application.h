@@ -11,6 +11,9 @@
 class Application
 {
 private:
+	static const float TIME_PER_FRAME;
+
+private:
 	GLFWwindow *m_window;
 	std::string m_name;
 	uint16_t m_width;
@@ -26,6 +29,8 @@ private:
 private:
 	Application(const Application &app) = delete;
 	Application & operator=(const Application &app) = delete;
+
+	void register_states(void);
 
 public:
 	Application(const std::string &name, uint16_t width, uint16_t height);

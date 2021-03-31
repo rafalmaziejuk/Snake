@@ -1,7 +1,7 @@
 #pragma once
 
-#include "State.h"
-#include "StateIdentifiers.h"
+#include "../States/State.h"
+#include "../States/StateIdentifiers.h"
 
 #include <functional>
 #include <memory>
