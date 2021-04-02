@@ -5,6 +5,8 @@
 #include "States/GameState.h"
 #include "States/GameoverState.h"
 
+#include "Utils/ImGui/ImGuiRenderer.h"
+
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 #include <glm/glm.hpp>
@@ -72,12 +74,16 @@ Application::Application(const std::string &name, uint16_t width, uint16_t heigh
 	spriteShader->set_mat4("projection", projection);
 
 	m_spriteRenderer = new SpriteRenderer(spriteShader);
+
+	ImGuiRenderer::init(m_window);
 }
 
 Application::~Application(void)
 {
-	glfwTerminate();
 	delete m_spriteRenderer;
+	ImGuiRenderer::shutdown();
+	glfwDestroyWindow(m_window);
+	glfwTerminate();
 }
 
 void Application::register_states(void)
@@ -105,6 +111,16 @@ void Application::run(void)
 			glfwSetWindowShouldClose(m_window, 1);
 
 		glClear(GL_COLOR_BUFFER_BIT);
+
+		
+		ImGuiRenderer::begin();
+		{
+			ImGui::Begin("FPS");
+			ImGui::Text("%.3f ms / %.1f FPS", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
+			ImGui::End();
+		}
+		ImGuiRenderer::end(m_width, m_height);
+
 		m_spriteRenderer->draw(ResourceManager::get_instance().get_texture("texture"), glm::vec2(200.0f, 200.0f), glm::vec2(300.0f, 400.0f));
 		m_stateManager.render();
 		glfwSwapBuffers(m_window);
