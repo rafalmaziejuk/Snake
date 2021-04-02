@@ -3,7 +3,7 @@
 #include "../Graphics/Shader.h"
 #include "../Graphics/Texture.h"
 
-#include <map>
+#include <unordered_map>
 #include <memory>
 
 class ResourceManager
@@ -21,8 +21,8 @@ public:
 	}
 
 private:
-	std::map<std::string, std::shared_ptr<Shader>> m_shaders;
-	std::map<std::string, std::shared_ptr<Texture>> m_textures;
+	std::unordered_map<std::string, std::shared_ptr<Shader>> m_shaders;
+	std::unordered_map<std::string, std::shared_ptr<Texture>> m_textures;
 
 public:
 	void load_shader(const std::string &name, const std::string &vert, const std::string &frag);

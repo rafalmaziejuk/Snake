@@ -7,7 +7,7 @@
 #include <memory>
 #include <utility>
 #include <vector>
-#include <map>
+#include <unordered_map>
 
 class StateManager
 {
@@ -33,7 +33,7 @@ private:
 
 private:
 	std::vector<std::unique_ptr<State>> m_states;
-	std::map<ID, std::function<std::unique_ptr<State>()>> m_stateConstructors;
+	std::unordered_map<ID, std::function<std::unique_ptr<State>()>> m_stateConstructors;
 	std::vector<PendingAction> m_pendingActions;
 	State::Context m_context;
 

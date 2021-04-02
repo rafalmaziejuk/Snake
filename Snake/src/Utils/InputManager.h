@@ -3,14 +3,16 @@
 class InputManager
 {
 private:
-	static InputManager *m_instance;
-
 	InputManager(void) = default;
-	InputManager(const InputManager & manager) = delete;
-	InputManager & operator=(const InputManager & manager) = delete;
+	InputManager(const InputManager &manager) = delete;
+	InputManager & operator=(const InputManager &manager) = delete;
 
 public:
-	static InputManager & get_instance(void);
+	inline static InputManager & get_instance(void)
+	{
+		static InputManager instance;
+		return instance;
+	}
 
 private:
 	bool m_keys[1024]{ };

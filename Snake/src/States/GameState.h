@@ -5,7 +5,7 @@
 class GameState : public State
 {
 private:
-
+	
 
 public:
 	GameState(StateManager &stateManager, Context context);

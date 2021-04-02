@@ -1,8 +1,6 @@
 #pragma once
 
-#include "Utils/ResourceManager.h"
 #include "Utils/StateManager.h"
-#include "Graphics/SpriteRenderer.h"
 
 #include <GLFW/glfw3.h>
 
@@ -19,7 +17,6 @@ private:
 
 private:
 	StateManager m_stateManager;
-	SpriteRenderer *m_spriteRenderer = nullptr;
 
 private:
 	Application(const Application &app) = delete;

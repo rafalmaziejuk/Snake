@@ -3,7 +3,7 @@
 GameState::GameState(StateManager &stateManager, Context context) :
 	State(stateManager, context)
 {
-
+	
 }
 
 GameState::~GameState(void)

@@ -3,7 +3,6 @@
 #include "StateIdentifiers.h"
 
 class StateManager;
-class ResourceManager;
 
 class State
 {
