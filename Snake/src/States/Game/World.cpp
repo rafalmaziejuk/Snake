@@ -1,6 +1,5 @@
 #include "World.h"
 #include "../../Graphics/SpriteRenderer.h"
-#include "../../Utils/ResourceManager.h"
 #include "../../Utils/InputManager.h"
 
 #include <GLFW/glfw3.h>
@@ -26,27 +25,15 @@ void World::update(float timestep)
 
 void World::handle_input(void)
 {
-	if (m_inputManager.is_key_pressed(GLFW_KEY_W))
-	{
-		m_snake.change_direction({ 0, -1 });
-		m_inputManager.key_process(GLFW_KEY_W);
-	}
-
-	if (m_inputManager.is_key_pressed(GLFW_KEY_S))
-	{
-		m_snake.change_direction({ 0, 1 });
-		m_inputManager.key_process(GLFW_KEY_S);
-	}
-
 	if (m_inputManager.is_key_pressed(GLFW_KEY_A))
 	{
-		m_snake.change_direction({ -1, 0 });
+		m_snake.change_direction(false);
 		m_inputManager.key_process(GLFW_KEY_A);
 	}
 
 	if (m_inputManager.is_key_pressed(GLFW_KEY_D))
 	{
-		m_snake.change_direction({ 1, 0 });
+		m_snake.change_direction(true);
 		m_inputManager.key_process(GLFW_KEY_D);
 	}
 }

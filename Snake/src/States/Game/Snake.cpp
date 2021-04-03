@@ -3,11 +3,10 @@
 #include "../../Utils/ResourceManager.h"
 #include "../../Graphics/SpriteRenderer.h"
 
-const float Snake::SEGMENT_SIZE = 20.0f;
+const float Snake::SEGMENT_SIZE = 40.0f;
+const float Snake::VELOCITY_SCALAR = 5.0f;
 
-Snake::Snake(void) :
-	m_velocity(200.0f),
-	m_direction()
+Snake::Snake(void)
 {
 	add_segment({ 400.0f, 300.0f });
 }
@@ -20,8 +19,8 @@ void Snake::draw(const SpriteRenderer &spriteRenderer) const
 
 void Snake::update(float timestep)
 {
-	auto &head = m_segments[0];
-	head.move({ timestep * m_velocity * m_direction.x, timestep * m_velocity * m_direction.y });
+	for (auto &segment : m_segments)
+		segment.move();
 }
 
 void Snake::add_segment(const glm::vec2 &position)

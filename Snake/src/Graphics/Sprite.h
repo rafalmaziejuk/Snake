@@ -3,7 +3,7 @@
 #include "Texture.h"
 
 #include <glad/glad.h>
-#include <glm/glm.hpp>
+#include <glm/vec2.hpp>
 
 #include <memory>
 
@@ -13,12 +13,14 @@ private:
 	std::shared_ptr<Texture> m_texture;
 	glm::vec2 m_position;
 	glm::vec2 m_size;
+	float m_angle;
 
 public:
-	Sprite(const std::shared_ptr<Texture> &texture, const glm::vec2 &position, const glm::vec2 &size) :
+	Sprite(const std::shared_ptr<Texture> &texture, const glm::vec2 &position, const glm::vec2 &size, float angle = 0.0f) :
 		m_texture(texture),
 		m_position(position),
-		m_size(size)
+		m_size(size),
+		m_angle(angle)
 	{
 
 	}
@@ -26,13 +28,19 @@ public:
 	Sprite(const Sprite &sprite) :
 		m_texture(sprite.m_texture),
 		m_position(sprite.m_position),
-		m_size(sprite.m_size)
+		m_size(sprite.m_size),
+		m_angle(sprite.m_angle)
 	{
 
 	}
 	
+	inline void bind_texture(uint32_t unit) const { m_texture->bind(unit); }
+	
 	inline glm::vec2 get_position(void) const { return m_position; }
 	inline void set_position(const glm::vec2 &position) { m_position = position; }
+
 	inline glm::vec2 get_size(void) const { return m_size; }
-	inline void bind_texture(uint32_t unit) const { m_texture->bind(unit); }
+
+	inline float get_angle(void) const { return m_angle; }
+	inline void rotate(float angle) { m_angle += angle; }
 };
