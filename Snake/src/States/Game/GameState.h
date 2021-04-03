@@ -1,11 +1,12 @@
 #pragma once
 
-#include "State.h"
+#include "../State.h"
+#include "World.h"
 
 class GameState : public State
 {
 private:
-	
+	World m_world;
 
 public:
 	GameState(StateManager &stateManager, Context context);

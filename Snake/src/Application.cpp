@@ -4,9 +4,9 @@
 #include "Utils/InputManager.h"
 #include "Graphics/SpriteRenderer.h"
 #include "States/StateIdentifiers.h"
-#include "States/MenuState.h"
-#include "States/GameState.h"
-#include "States/GameoverState.h"
+#include "States/Menu/MenuState.h"
+#include "States/Game/GameState.h"
+#include "States/Game/GameoverState.h"
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
@@ -109,13 +109,9 @@ void Application::run(void)
 			glfwSetWindowShouldClose(m_window, 1);
 
 		glClear(GL_COLOR_BUFFER_BIT);
-		ImGuiRenderer::begin();
-		ImGui::Begin("FPS");
-		ImGui::Text("%.3f ms / %.1f FPS", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
-		ImGui::End();
-		ImGuiRenderer::end(m_width, m_height);
 
 		m_stateManager.render();
+
 		glfwSwapBuffers(m_window);
 	}
 }
