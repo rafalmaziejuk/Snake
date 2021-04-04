@@ -11,7 +11,8 @@ World::World(uint16_t windowWidth, uint16_t windowHeight) :
 	m_windowHeight(windowHeight),
 	m_snake(windowWidth, windowHeight),
 	m_food(),
-	m_isPlayerAlive(true)
+	m_isPlayerAlive(true),
+	m_playerScore(0)
 {
 	m_food.reset_position(m_snake);
 }
@@ -31,6 +32,7 @@ void World::update(float timestep)
 
 	if (m_snake.check_collision_with_food(m_food))
 	{
+		m_playerScore++;
 		m_food.reset_position(m_snake);
 		m_snake.extend();
 	}

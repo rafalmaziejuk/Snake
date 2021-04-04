@@ -19,6 +19,7 @@ private:
 	Snake m_snake;
 	Food m_food;
 	bool m_isPlayerAlive;
+	uint16_t m_playerScore;
 
 public:
 	World(uint16_t windowWidth, uint16_t windowHeight);

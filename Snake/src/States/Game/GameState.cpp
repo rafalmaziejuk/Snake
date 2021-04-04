@@ -30,7 +30,6 @@ bool GameState::update(float timestep)
 	
 	if (!m_world.is_player_alive())
 	{
-		pop_state();
 		push_state(ID::GAMEOVER_STATE);
 	}
 
