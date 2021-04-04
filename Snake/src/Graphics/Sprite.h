@@ -42,5 +42,11 @@ public:
 	inline glm::vec2 get_size(void) const { return m_size; }
 
 	inline float get_angle(void) const { return m_angle; }
-	inline void rotate(float angle) { m_angle += angle; }
+	void set_angle(float angle) 
+	{ 
+		m_angle = static_cast<float>(fmod(angle, 360)); 
+		
+		if (m_angle < 0)
+			m_angle += 360.0f;
+	}
 };

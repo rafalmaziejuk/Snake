@@ -13,6 +13,8 @@ class Snake
 private:
 	static const float SEGMENT_SIZE;
 	static const float VELOCITY_SCALAR;
+	static const float ROTATION_SPEED;
+	static const float SPACING;
 
 private:
 	struct Segment
@@ -25,20 +27,18 @@ private:
 
 		}
 
-		void move(void)
+		void move(const glm::vec2 &position)
 		{
-			glm::vec2 position(m_sprite.get_position());
-			glm::vec2 newPosition;
-
-			newPosition.x = position.x +  cosf(glm::radians(90.0f - m_sprite.get_angle())) * VELOCITY_SCALAR;
-			newPosition.y = position.y + -sinf(glm::radians(90.0f - m_sprite.get_angle())) * VELOCITY_SCALAR;
+			glm::vec2 newPosition(m_sprite.get_position());
+			newPosition.x += position.x;
+			newPosition.y += position.y;
 
 			m_sprite.set_position(newPosition);
 		}
 		
 		inline void rotate(float angle)
 		{
-			m_sprite.rotate(angle);
+			m_sprite.set_angle(m_sprite.get_angle() + angle);
 		}
 	};
 
@@ -56,6 +56,6 @@ public:
 
 	inline void change_direction(bool direction) 
 	{ 
-		direction ? m_segments.begin()->rotate(5.0f) : m_segments.begin()->rotate(-5.0f);
+		direction ? m_segments.begin()->rotate(ROTATION_SPEED) : m_segments.begin()->rotate(-ROTATION_SPEED);
 	}
 };
