@@ -54,8 +54,8 @@ public:
 	void update(float timestep);
 	void handle_input(void);
 
-	void add_state(ID stateID);
-	void delete_state(void);
+	void push_state(ID stateID);
+	void pop_state(void);
 	bool is_empty(void) const;
 };
 

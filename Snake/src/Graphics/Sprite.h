@@ -16,6 +16,15 @@ private:
 	float m_angle;
 
 public:
+	Sprite(const std::shared_ptr<Texture> &texture) :
+		m_texture(texture),
+		m_position(),
+		m_size(),
+		m_angle(0.0f)
+	{
+
+	}
+
 	Sprite(const std::shared_ptr<Texture> &texture, const glm::vec2 &position, const glm::vec2 &size, float angle = 0.0f) :
 		m_texture(texture),
 		m_position(position),
@@ -40,6 +49,7 @@ public:
 	inline void set_position(const glm::vec2 &position) { m_position = position; }
 
 	inline glm::vec2 get_size(void) const { return m_size; }
+	inline void set_size(const glm::vec2 &size) { m_size = size; }
 
 	inline float get_angle(void) const { return m_angle; }
 	void set_angle(float angle) 

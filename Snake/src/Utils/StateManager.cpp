@@ -66,12 +66,12 @@ void StateManager::handle_input(void)
 	do_pending_actions();
 }
 
-void StateManager::add_state(ID stateID)
+void StateManager::push_state(ID stateID)
 {
 	m_pendingActions.push_back(PendingAction(Action::ADD, stateID));
 }
 
-void StateManager::delete_state(void)
+void StateManager::pop_state(void)
 {
 	m_pendingActions.push_back(PendingAction(Action::DELETE));
 }

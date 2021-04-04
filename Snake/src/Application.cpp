@@ -13,6 +13,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 
 #include <cassert>
+#include <ctime>
 
 static void resize_callback(GLFWwindow *window, GLint width, GLint height)
 {
@@ -40,6 +41,7 @@ Application::Application(const std::string &name, uint16_t width, uint16_t heigh
 	m_height(height),
 	m_stateManager(State::Context(width, height))
 {
+	std::srand(static_cast<unsigned int>(std::time(nullptr)));
 	assert(glfwInit());
 
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
@@ -53,6 +55,7 @@ Application::Application(const std::string &name, uint16_t width, uint16_t heigh
 	glfwMakeContextCurrent(m_window);
 	glfwSetFramebufferSizeCallback(m_window, resize_callback);
 	glfwSetKeyCallback(m_window, key_callback);
+	glfwSwapInterval(1);
 
 	assert(gladLoadGLLoader((GLADloadproc)glfwGetProcAddress));
 	glViewport(0, 0, m_width, m_height);
@@ -61,9 +64,9 @@ Application::Application(const std::string &name, uint16_t width, uint16_t heigh
 	glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
 
 	register_states();
-	m_stateManager.add_state(ID::GAME_STATE);
+	m_stateManager.push_state(ID::GAME_STATE);
 
-	ResourceManager::get_instance().load_texture("segment", "assets/textures/segment.png");
+	ResourceManager::get_instance().load_texture("segment", "assets/textures/test.png");
 
 	glm::mat4 projection = glm::ortho(0.0f, static_cast<float>(m_width), static_cast<float>(m_height), 0.0f, -1.0f, 1.0f);
 	ResourceManager::get_instance().load_shader("sprite", "assets/shaders/sprite.vert", "assets/shaders/sprite.frag");

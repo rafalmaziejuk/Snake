@@ -13,12 +13,12 @@ State::~State(void)
 
 }
 
-void State::add_state(ID stateID)
+void State::push_state(ID stateID)
 {
-	m_stateManager->add_state(stateID);
+	m_stateManager->push_state(stateID);
 }
 
-void State::delete_state(void)
+void State::pop_state(void)
 {
-	m_stateManager->delete_state();
+	m_stateManager->pop_state();
 }

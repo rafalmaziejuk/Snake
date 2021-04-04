@@ -17,6 +17,8 @@ private:
 
 private:
 	Snake m_snake;
+	Food m_food;
+	bool m_isPlayerAlive;
 
 public:
 	World(uint16_t windowWidth, uint16_t windowHeight);
@@ -24,4 +26,6 @@ public:
 	void draw(void) const;
 	void update(float timestep);
 	void handle_input(void);
+
+	inline bool is_player_alive(void) const { return m_isPlayerAlive; }
 };

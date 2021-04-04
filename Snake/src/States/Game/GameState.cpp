@@ -27,11 +27,19 @@ void GameState::draw(void) const
 bool GameState::update(float timestep)
 {
 	m_world.update(timestep);
+	
+	if (!m_world.is_player_alive())
+	{
+		pop_state();
+		push_state(ID::GAMEOVER_STATE);
+	}
+
 	return true;
 }
 
 bool GameState::handle_input(void)
 {
 	m_world.handle_input();
+
 	return true;
 }

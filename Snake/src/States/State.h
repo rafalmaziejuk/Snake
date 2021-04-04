@@ -30,8 +30,8 @@ protected:
 		return m_context;
 	}
 
-	void add_state(ID stateID);
-	void delete_state(void);
+	void push_state(ID stateID);
+	void pop_state(void);
 
 public:
 	State(StateManager &stateManager, Context context);

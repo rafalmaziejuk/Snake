@@ -7,14 +7,16 @@
 #include <vector>
 
 class SpriteRenderer;
+class Food;
 
 class Snake
 {
 private:
 	static const float SEGMENT_SIZE;
-	static const float VELOCITY_SCALAR;
-	static const float ROTATION_SPEED;
-	static const float SPACING;
+	const float SPACING = 20.0f;
+	const float VELOCITY = 5.0f;
+	const float ROTATION_SPEED = 5.0f;
+	const uint8_t INIT_SNAKE_LENGTH = 10;
 
 private:
 	struct Segment
@@ -44,18 +46,40 @@ private:
 
 private:
 	std::vector<Segment> m_segments;
+	uint16_t m_windowWidth;
+	uint16_t m_windowHeight;
 
 private:
 	void add_segment(const glm::vec2 &position);
 
 public:
-	Snake(void);
+	Snake(uint16_t windowWidth, uint16_t windowHeight);
+
+	inline void change_direction(bool direction)
+	{
+		direction ? m_segments.begin()->rotate(ROTATION_SPEED) : m_segments.begin()->rotate(-ROTATION_SPEED);
+	}
 
 	void draw(const SpriteRenderer &spriteRenderer) const;
 	void update(float timestep);
 
-	inline void change_direction(bool direction) 
-	{ 
-		direction ? m_segments.begin()->rotate(ROTATION_SPEED) : m_segments.begin()->rotate(-ROTATION_SPEED);
-	}
+	bool check_collision(void) const;
+	bool check_collision_with_food(const Food &food);
+	void extend(void);
+
+	friend class Food;
+};
+
+class Food
+{
+private:
+	Sprite m_sprite;
+
+public:
+	Food(void);
+
+	void draw(const SpriteRenderer &spriteRenderer) const;
+	void reset_position(const Snake &snake);
+
+	friend class Snake;
 };
