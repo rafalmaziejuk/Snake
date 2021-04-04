@@ -29,7 +29,8 @@ project "Snake"
 		"%{IncludeDir.glad}",
 		"%{IncludeDir.imgui}",
 		"%{IncludeDir.glm}",
-		"%{IncludeDir.stb_image}"
+		"%{IncludeDir.stb_image}",
+		"%{IncludeDir.freetype}"
 	}
 
 	links
@@ -37,6 +38,7 @@ project "Snake"
 		"glfw",
 		"glad",
 		"imgui",
+		"freetype",
 		"opengl32.lib"
 	}
 

@@ -10,3 +10,7 @@
 	path = Snake/vendor/imgui
 	url = https://github.com/ocornut/imgui
 	branch = master
+[submodule "Snake/vendor/freetype"]
+	path = Snake/vendor/freetype
+	url = https://gitlab.freedesktop.org/freetype/freetype.git
+	branch = master
