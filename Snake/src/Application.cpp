@@ -64,7 +64,7 @@ Application::Application(const std::string &name, uint16_t width, uint16_t heigh
 	glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
 
 	register_states();
-	m_stateManager.push_state(ID::GAME_STATE);
+	m_stateManager.push_state(ID::MENU_STATE);
 
 	ResourceManager::get_instance().load_texture("segment", "assets/textures/test.png");
 
