@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Snake.h"
+#include "../../Graphics/TextRenderer.h"
 
 class SpriteRenderer;
 class InputManager;
@@ -10,6 +11,7 @@ class World
 private:
 	SpriteRenderer &m_spriteRenderer;
 	InputManager &m_inputManager;
+	TextRenderer m_textRenderer;
 
 private:
 	uint16_t m_windowWidth;

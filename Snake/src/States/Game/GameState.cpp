@@ -5,7 +5,7 @@ GameState::GameState(StateManager &stateManager, Context context) :
 	State(stateManager, context),
 	m_world(context.m_windowWidth, context.m_windowHeight)
 {
-	
+
 }
 
 GameState::~GameState(void)
@@ -30,6 +30,7 @@ bool GameState::update(float timestep)
 	
 	if (!m_world.is_player_alive())
 	{
+		pop_state();
 		push_state(ID::GAMEOVER_STATE);
 	}
 

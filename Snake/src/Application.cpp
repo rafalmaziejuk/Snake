@@ -70,10 +70,17 @@ Application::Application(const std::string &name, uint16_t width, uint16_t heigh
 
 	glm::mat4 projection = glm::ortho(0.0f, static_cast<float>(m_width), static_cast<float>(m_height), 0.0f, -1.0f, 1.0f);
 	ResourceManager::get_instance().load_shader("sprite", "assets/shaders/sprite.vert", "assets/shaders/sprite.frag");
+	ResourceManager::get_instance().load_shader("text", "assets/shaders/text.vert", "assets/shaders/text.frag");
 
 	auto spriteShader = ResourceManager::get_instance().get_shader("sprite");
 	spriteShader->use();
 	spriteShader->set_int("sprite", 0);
+	spriteShader->set_mat4("projection", projection);
+	SpriteRenderer::get_instance().set_shader(spriteShader);
+
+	auto textShader = ResourceManager::get_instance().get_shader("text");
+	spriteShader->use();
+	spriteShader->set_int("text", 0);
 	spriteShader->set_mat4("projection", projection);
 	SpriteRenderer::get_instance().set_shader(spriteShader);
 
