@@ -12,5 +12,5 @@
 	branch = master
 [submodule "Snake/vendor/freetype"]
 	path = Snake/vendor/freetype
-	url = https://gitlab.freedesktop.org/freetype/freetype.git
+	url = https://github.com/rafalmaziejuk/freetype.git
 	branch = master
