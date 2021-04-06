@@ -1,6 +1,6 @@
 [submodule "Snake/vendor/glfw"]
 	path = Snake/vendor/glfw
-	url = https://github.com/glfw/glfw
+	url = https://github.com/rafalmaziejuk/glfw.git
 	branch = master
 [submodule "Snake/vendor/glm"]
 	path = Snake/vendor/glm
@@ -8,7 +8,7 @@
 	branch = master
 [submodule "Snake/vendor/imgui"]
 	path = Snake/vendor/imgui
-	url = https://github.com/ocornut/imgui
+	url = https://github.com/rafalmaziejuk/imgui.git
 	branch = master
 [submodule "Snake/vendor/freetype"]
 	path = Snake/vendor/freetype
