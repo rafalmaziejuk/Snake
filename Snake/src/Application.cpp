@@ -1,12 +1,13 @@
 #include "Application.h"
 #include "Utils/ImGui/ImGuiRenderer.h"
-#include "Utils/ResourceManager.h"
 #include "Utils/InputManager.h"
 #include "Graphics/SpriteRenderer.h"
 #include "States/StateIdentifiers.h"
 #include "States/Menu/MenuState.h"
 #include "States/Game/GameState.h"
 #include "States/Game/GameoverState.h"
+#include "Graphics/Shader.h"
+#include "Graphics/Texture.h"
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
@@ -65,24 +66,6 @@ Application::Application(const std::string &name, uint16_t width, uint16_t heigh
 
 	register_states();
 	m_stateManager.push_state(ID::MENU_STATE);
-
-	ResourceManager::get_instance().load_texture("segment", "assets/textures/test.png");
-
-	glm::mat4 projection = glm::ortho(0.0f, static_cast<float>(m_width), static_cast<float>(m_height), 0.0f, -1.0f, 1.0f);
-	ResourceManager::get_instance().load_shader("sprite", "assets/shaders/sprite.vert", "assets/shaders/sprite.frag");
-	ResourceManager::get_instance().load_shader("text", "assets/shaders/text.vert", "assets/shaders/text.frag");
-
-	auto spriteShader = ResourceManager::get_instance().get_shader("sprite");
-	spriteShader->use();
-	spriteShader->set_int("sprite", 0);
-	spriteShader->set_mat4("projection", projection);
-	SpriteRenderer::get_instance().set_shader(spriteShader);
-
-	auto textShader = ResourceManager::get_instance().get_shader("text");
-	spriteShader->use();
-	spriteShader->set_int("text", 0);
-	spriteShader->set_mat4("projection", projection);
-	SpriteRenderer::get_instance().set_shader(spriteShader);
 
 	ImGuiRenderer::init(m_window);
 }

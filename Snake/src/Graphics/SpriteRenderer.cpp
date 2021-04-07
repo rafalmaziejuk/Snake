@@ -1,13 +1,20 @@
 #include "SpriteRenderer.h"
+#include "Shader.h"
 #include "Sprite.h"
 
 #include <glad/glad.h>
 #include <glm/gtc/matrix_transform.hpp>
 
 SpriteRenderer::SpriteRenderer(void) :
-	m_shader(nullptr),
+	m_shader(Shader::create_shader("sprite", "assets/shaders/sprite.glsl")),
 	m_vao(0)
 {
+	//temp
+	glm::mat4 projection = glm::ortho(0.0f, 800.0f, 600.0f, 0.0f, -1.0f, 1.0f);
+	m_shader->bind();
+	m_shader->set_int("sprite", 0);
+	m_shader->set_mat4("projection", projection);
+
 	float vertices[] =
 	{
 		-0.5f, -0.5f, 0.0f, 0.0f, //bottom-left
@@ -49,7 +56,7 @@ SpriteRenderer::~SpriteRenderer(void)
 
 void SpriteRenderer::draw(const Sprite &sprite) const
 {
-	m_shader->use();
+	m_shader->bind();
 
 	glm::mat4 model = glm::mat4(1.0f);
 	model = glm::translate(model, glm::vec3(sprite.get_position(), 0.0f));

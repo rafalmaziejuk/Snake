@@ -1,14 +1,15 @@
 #include "Snake.h"
 
-#include "../../Utils/ResourceManager.h"
 #include "../../Utils/ImGui/ImGuiRenderer.h"
 #include "../../Graphics/SpriteRenderer.h"
+#include "../../Graphics/Texture.h"
 
 const float Snake::SEGMENT_SIZE = 25.0f;
 
 Snake::Snake(uint16_t windowWidth, uint16_t windowHeight) :
 	m_windowWidth(windowWidth),
-	m_windowHeight(windowHeight)
+	m_windowHeight(windowHeight),
+	m_segmentTexture(Texture::create_texture("assets/textures/test.png"))
 {
 	for (uint8_t i = 0; i < INIT_SNAKE_LENGTH; i++)
 		add_segment({ 400.0f, 300.0f });
@@ -16,7 +17,7 @@ Snake::Snake(uint16_t windowWidth, uint16_t windowHeight) :
 
 void Snake::add_segment(const glm::vec2 &position)
 {
-	m_segments.push_back(Sprite(ResourceManager::get_instance().get_texture("segment"), position, { SEGMENT_SIZE, SEGMENT_SIZE }));
+	m_segments.push_back(Sprite(m_segmentTexture, position, { SEGMENT_SIZE, SEGMENT_SIZE }));
 }
 
 void Snake::draw(const SpriteRenderer &spriteRenderer) const
@@ -89,7 +90,7 @@ void Snake::extend(void)
 }
 
 Food::Food(void) :
-	m_sprite(ResourceManager::get_instance().get_texture("segment"))
+	m_sprite(Texture::create_texture("assets/textures/test.png"))
 {
 	m_sprite.set_size({ Snake::SEGMENT_SIZE, Snake::SEGMENT_SIZE });
 }

@@ -3,10 +3,6 @@
 !vendor/premake
 bin-int/
 
-#folders
-enc_temp_folder/
-
-
 #Visual Studio files
 .vs/
 **.sln

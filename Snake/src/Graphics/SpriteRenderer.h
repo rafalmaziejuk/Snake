@@ -27,7 +27,5 @@ public:
 	SpriteRenderer(void);
 	~SpriteRenderer(void);
 
-	inline void set_shader(const std::shared_ptr<Shader> &shader) { m_shader = shader; }
-
 	void draw(const Sprite &sprite) const;
 };

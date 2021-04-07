@@ -19,6 +19,8 @@ private:
 	const uint8_t INIT_SNAKE_LENGTH = 10;
 
 private:
+	std::shared_ptr<Texture> m_segmentTexture;
+
 	struct Segment
 	{
 		Sprite m_sprite;

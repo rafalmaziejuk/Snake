@@ -1,17 +1,19 @@
 #include "TextRenderer.h"
-#include "../Utils/ResourceManager.h"
+#include "Shader.h"
 
 #include <glad/glad.h>
 #include <glm/gtc/matrix_transform.hpp>
 #include <ft2build.h>
 #include FT_FREETYPE_H
 
-TextRenderer::TextRenderer(uint16_t windowWidth, uint16_t windowHeight)
+TextRenderer::TextRenderer(uint16_t windowWidth, uint16_t windowHeight) :
+	m_shader(Shader::create_shader("text", "assets/shaders/text.glsl"))
 {
-	m_shader = ResourceManager::get_instance().get_shader("text");
-	m_shader->use();
-	m_shader->set_mat4("projection", glm::ortho(0.0f, static_cast<float>(windowWidth), static_cast<float>(windowHeight), 0.0f));
+	//temp
+	glm::mat4 projection = glm::ortho(0.0f, static_cast<float>(windowWidth), static_cast<float>(windowHeight), 0.0f, -1.0f, 1.0f);
+	m_shader->bind();
 	m_shader->set_int("text", 0);
+	m_shader->set_mat4("projection", projection);
 
 	glGenVertexArrays(1, &m_vao);
 	glBindVertexArray(m_vao);
@@ -85,7 +87,7 @@ void TextRenderer::load(const std::string &filepath, uint8_t fontSize)
 
 void TextRenderer::render_text(const std::string &text, glm::fvec2 position, float scale, const glm::vec3 &color) const
 {
-	m_shader->use();
+	m_shader->bind();
 	m_shader->set_vec3f("textColor", color);
 
 	glActiveTexture(GL_TEXTURE0);
