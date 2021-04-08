@@ -5,6 +5,7 @@
 #include <memory>
 
 class Sprite;
+class VertexArray;
 
 class SpriteRenderer
 {
@@ -21,11 +22,10 @@ public:
 
 private:
 	std::shared_ptr<Shader> m_shader;
-	uint32_t m_vao;
+	std::shared_ptr<VertexArray> m_vao;
 
 public:
 	SpriteRenderer(void);
-	~SpriteRenderer(void);
 
 	void draw(const Sprite &sprite) const;
 };

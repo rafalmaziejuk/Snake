@@ -7,10 +7,10 @@
 
 std::shared_ptr<Texture> Texture::create_texture(const std::string &filepath)
 {
-	return std::make_shared<OpenGLTexture>(filepath);
+	return std::make_shared<Texture>(filepath);
 }
 
-OpenGLTexture::OpenGLTexture(const std::string &filepath)
+Texture::Texture(const std::string &filepath)
 {
 	int width, height, channels;
 	stbi_uc *data = stbi_load(filepath.c_str(), &width, &height, &channels, 0);
@@ -48,12 +48,12 @@ OpenGLTexture::OpenGLTexture(const std::string &filepath)
 	stbi_image_free(data);
 }
 
-OpenGLTexture::~OpenGLTexture(void)
+Texture::~Texture(void)
 {
 	glDeleteTextures(1, &m_id);
 }
 
-void OpenGLTexture::bind(uint32_t slot) const
+void Texture::bind(uint32_t slot) const
 {
 	glActiveTexture(slot);
 	glBindTexture(GL_TEXTURE_2D, m_id);

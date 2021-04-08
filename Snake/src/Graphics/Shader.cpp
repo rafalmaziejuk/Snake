@@ -5,17 +5,7 @@
 
 #include <iostream>
 
-std::shared_ptr<Shader> Shader::create_shader(const std::string &name, const std::string &vert, const std::string &frag)
-{
-	return std::make_shared<OpenGLShader>(name, vert, frag);
-}
-
-std::shared_ptr<Shader> Shader::create_shader(const std::string &name, const std::string &filepath)
-{
-	return std::make_shared<OpenGLShader>(name, filepath);
-}
-
-OpenGLShader::OpenGLShader(const std::string &name, const std::string &vert, const std::string &frag) :
+Shader::Shader(const std::string &name, const std::string &vert, const std::string &frag) :
 	m_name(name)
 {
 	std::string vertexShader = FileIO::file_read(vert);
@@ -28,7 +18,7 @@ OpenGLShader::OpenGLShader(const std::string &name, const std::string &vert, con
 	compile(shaderSources);
 }
 
-OpenGLShader::OpenGLShader(const std::string &name, const std::string &filepath) :
+Shader::Shader(const std::string &name, const std::string &filepath) :
 	m_name(name)
 {
 	std::string shaderSource = FileIO::file_read(filepath);
@@ -51,12 +41,12 @@ OpenGLShader::OpenGLShader(const std::string &name, const std::string &filepath)
 	compile(shaderSources);
 }
 
-OpenGLShader::~OpenGLShader(void)
+Shader::~Shader(void)
 {
 	glDeleteProgram(m_id);
 }
 
-void OpenGLShader::compile(std::unordered_map<GLenum, std::string> shaderSources)
+void Shader::compile(std::unordered_map<GLenum, std::string> shaderSources)
 {
 	GLint isCompiled;
 	GLuint vertexShader = glCreateShader(GL_VERTEX_SHADER);
@@ -115,31 +105,41 @@ void OpenGLShader::compile(std::unordered_map<GLenum, std::string> shaderSources
 	glDeleteShader(fragmentShader);
 }
 
-void OpenGLShader::bind(void) const
+void Shader::bind(void) const
 {
 	glUseProgram(m_id);
 }
 
-void OpenGLShader::set_int(const std::string &name, int value)
+void Shader::set_int(const std::string &name, int value)
 {
 	GLint location = glGetUniformLocation(m_id, name.c_str());
 	glUniform1i(location, value);
 }
 
-void OpenGLShader::set_float(const std::string &name, float value)
+void Shader::set_float(const std::string &name, float value)
 {
 	GLint location = glGetUniformLocation(m_id, name.c_str());
 	glUniform1f(location, value);
 }
 
-void OpenGLShader::set_vec3f(const std::string &name, const glm::vec3 &vec)
+void Shader::set_vec3f(const std::string &name, const glm::vec3 &vec)
 {
 	GLint location = glGetUniformLocation(m_id, name.c_str());
 	glUniform3f(location, vec.x, vec.y, vec.z);
 }
 
-void OpenGLShader::set_mat4(const std::string & name, const glm::mat4 &mat)
+void Shader::set_mat4(const std::string & name, const glm::mat4 &mat)
 {
 	GLint location = glGetUniformLocation(m_id, name.c_str());
 	glUniformMatrix4fv(location, 1, GL_FALSE, &mat[0][0]);
+}
+
+std::shared_ptr<Shader> Shader::create_shader(const std::string &name, const std::string &vert, const std::string &frag)
+{
+	return std::make_shared<Shader>(name, vert, frag);
+}
+
+std::shared_ptr<Shader> Shader::create_shader(const std::string &name, const std::string &filepath)
+{
+	return std::make_shared<Shader>(name, filepath);
 }

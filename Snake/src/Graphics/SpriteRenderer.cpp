@@ -1,13 +1,15 @@
 #include "SpriteRenderer.h"
 #include "Shader.h"
 #include "Sprite.h"
+#include "Buffer.h"
+#include "VertexArray.h"
 
 #include <glad/glad.h>
 #include <glm/gtc/matrix_transform.hpp>
 
 SpriteRenderer::SpriteRenderer(void) :
 	m_shader(Shader::create_shader("sprite", "assets/shaders/sprite.glsl")),
-	m_vao(0)
+	m_vao(VertexArray::create_vertex_array())
 {
 	//temp
 	glm::mat4 projection = glm::ortho(0.0f, 800.0f, 600.0f, 0.0f, -1.0f, 1.0f);
@@ -23,35 +25,21 @@ SpriteRenderer::SpriteRenderer(void) :
 		-0.5f,  0.5f, 0.0f, 1.0f  //top-left
 	};
 
-	unsigned int indices[] =
+	std::shared_ptr<VertexBuffer> vbo = VertexBuffer::create_vertex_buffer(vertices, sizeof(vertices));
+	BufferLayout layout =
+	{
+		{ Type::FLOAT4 }
+	};
+	vbo->set_layout(layout);
+	m_vao->set_vertex_buffer(vbo);
+
+	uint32_t indices[] =
 	{
 		0, 1, 2,
 		2, 3, 0
 	};
-	
-	glGenVertexArrays(1, &m_vao);
-	glBindVertexArray(m_vao);
-
-	unsigned int vbo;
-	glGenBuffers(1, &vbo);
-	glBindBuffer(GL_ARRAY_BUFFER, vbo);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-
-	unsigned int ebo;
-	glGenBuffers(1, &ebo);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), &indices, GL_STATIC_DRAW);
-
-	glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(float), (void *)0);
-	glEnableVertexAttribArray(0);
-
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
-	glBindVertexArray(0);
-}
-
-SpriteRenderer::~SpriteRenderer(void)
-{
-	glDeleteVertexArrays(1, &m_vao);
+	std::shared_ptr<ElementBuffer> ebo = ElementBuffer::create_element_buffer(indices, sizeof(indices) / sizeof(uint32_t));
+	m_vao->set_element_buffer(ebo);
 }
 
 void SpriteRenderer::draw(const Sprite &sprite) const
@@ -66,6 +54,7 @@ void SpriteRenderer::draw(const Sprite &sprite) const
 
 	sprite.bind_texture(GL_TEXTURE0);
 
-	glBindVertexArray(m_vao);
-	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+	m_vao->bind();
+	glDrawElements(GL_TRIANGLES, m_vao->get_element_buffer()->get_count(), GL_UNSIGNED_INT, 0);
+	glBindTexture(GL_TEXTURE_2D, 0);
 }
