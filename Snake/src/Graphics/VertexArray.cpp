@@ -55,8 +55,3 @@ void VertexArray::set_element_buffer(const std::shared_ptr<ElementBuffer> &eleme
 	elementBuffer->bind();
 	m_elementBuffer = elementBuffer;
 }
-
-std::shared_ptr<VertexArray> VertexArray::create_vertex_array(void)
-{
-	return std::make_shared<VertexArray>();
-}

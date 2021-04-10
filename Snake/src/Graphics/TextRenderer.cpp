@@ -7,9 +7,8 @@
 #include FT_FREETYPE_H
 
 TextRenderer::TextRenderer(uint16_t windowWidth, uint16_t windowHeight) :
-	m_shader(Shader::create_shader("text", "assets/shaders/text.glsl"))
+	m_shader(std::make_shared<Shader>("text", "assets/shaders/text.glsl"))
 {
-	//temp
 	glm::mat4 projection = glm::ortho(0.0f, static_cast<float>(windowWidth), static_cast<float>(windowHeight), 0.0f, -1.0f, 1.0f);
 	m_shader->bind();
 	m_shader->set_int("text", 0);

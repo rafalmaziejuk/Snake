@@ -38,7 +38,7 @@ void StateManager::do_pending_actions(void)
 	m_pendingActions.clear();
 }
 
-void StateManager::render(void)
+void StateManager::draw(void)
 {
 	for (auto &state : m_states)
 		state->draw();

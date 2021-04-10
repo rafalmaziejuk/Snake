@@ -88,7 +88,7 @@ public:
 	inline size_t get_vbelement_count(void) const { return m_vbElements.size(); }
 	inline uint32_t get_stride(void) const { return m_stride; }
 
-	const VBElement & operator[](uint8_t index) const
+	inline const VBElement & operator[](uint8_t index) const
 	{
 		return m_vbElements[index];
 	}
@@ -107,8 +107,6 @@ public:
 	inline void set_layout(const BufferLayout &layout) { m_layout = layout; }
 	inline const BufferLayout & get_layout(void) const { return m_layout; }
 	void bind(void) const;
-
-	static std::shared_ptr<VertexBuffer> create_vertex_buffer(const float *data, uint32_t size);
 };
 
 class ElementBuffer
@@ -123,6 +121,4 @@ public:
 
 	inline uint8_t get_count(void) const { return m_elementCount; }
 	void bind(void) const;
-
-	static std::shared_ptr<ElementBuffer> create_element_buffer(const uint32_t *data, uint8_t elementCount);
 };

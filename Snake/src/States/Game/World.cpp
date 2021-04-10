@@ -1,12 +1,10 @@
 #include "World.h"
-#include "../../Graphics/SpriteRenderer.h"
 #include "../../Utils/InputManager.h"
 
 #include <GLFW/glfw3.h>
 #include <sstream>
 
 World::World(uint16_t windowWidth, uint16_t windowHeight) :
-	m_spriteRenderer(SpriteRenderer::get_instance()),
 	m_inputManager(InputManager::get_instance()),
 	m_textRenderer(windowWidth, windowHeight),
 	m_windowWidth(windowWidth),
@@ -26,8 +24,8 @@ void World::draw(void) const
 	ss << m_playerScore;
 	m_textRenderer.render_text(ss.str(), { static_cast<float>(m_windowWidth) - 30.0f, 5.0f }, 1.0f);
 
-	m_snake.draw(m_spriteRenderer);
-	m_food.draw(m_spriteRenderer);
+	m_snake.draw();
+	m_food.draw();
 }
 
 void World::update(float timestep)

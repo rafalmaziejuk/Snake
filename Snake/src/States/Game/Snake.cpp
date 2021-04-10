@@ -1,7 +1,7 @@
 #include "Snake.h"
 
 #include "../../Utils/ImGui/ImGuiRenderer.h"
-#include "../../Graphics/SpriteRenderer.h"
+#include "../../Graphics/Renderer.h"
 #include "../../Graphics/Texture.h"
 
 const float Snake::SEGMENT_SIZE = 25.0f;
@@ -20,10 +20,10 @@ void Snake::add_segment(const glm::vec2 &position)
 	m_segments.push_back(Sprite(m_segmentTexture, position, { SEGMENT_SIZE, SEGMENT_SIZE }));
 }
 
-void Snake::draw(const SpriteRenderer &spriteRenderer) const
+void Snake::draw(void) const
 {
 	for (auto &segment : m_segments)
-		spriteRenderer.draw(segment.m_sprite);
+		Renderer::draw(segment.m_sprite);
 }
 
 void Snake::update(float timestep)
@@ -95,9 +95,9 @@ Food::Food(void) :
 	m_sprite.set_size({ Snake::SEGMENT_SIZE, Snake::SEGMENT_SIZE });
 }
 
-void Food::draw(const SpriteRenderer &spriteRenderer) const
+void Food::draw(void) const
 {
-	spriteRenderer.draw(m_sprite);
+	Renderer::draw(m_sprite);
 }
 
 void Food::reset_position(const Snake &snake)

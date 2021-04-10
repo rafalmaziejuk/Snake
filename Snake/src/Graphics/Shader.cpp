@@ -133,13 +133,3 @@ void Shader::set_mat4(const std::string & name, const glm::mat4 &mat)
 	GLint location = glGetUniformLocation(m_id, name.c_str());
 	glUniformMatrix4fv(location, 1, GL_FALSE, &mat[0][0]);
 }
-
-std::shared_ptr<Shader> Shader::create_shader(const std::string &name, const std::string &vert, const std::string &frag)
-{
-	return std::make_shared<Shader>(name, vert, frag);
-}
-
-std::shared_ptr<Shader> Shader::create_shader(const std::string &name, const std::string &filepath)
-{
-	return std::make_shared<Shader>(name, filepath);
-}

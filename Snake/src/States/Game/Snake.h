@@ -62,7 +62,7 @@ public:
 		direction ? m_segments.begin()->rotate(ROTATION_SPEED) : m_segments.begin()->rotate(-ROTATION_SPEED);
 	}
 
-	void draw(const SpriteRenderer &spriteRenderer) const;
+	void draw(void) const;
 	void update(float timestep);
 
 	bool check_collision(void) const;
@@ -80,7 +80,7 @@ private:
 public:
 	Food(void);
 
-	void draw(const SpriteRenderer &spriteRenderer) const;
+	void draw(void) const;
 	void reset_position(const Snake &snake);
 
 	friend class Snake;

@@ -16,8 +16,8 @@ Texture::Texture(const std::string &filepath)
 	stbi_uc *data = stbi_load(filepath.c_str(), &width, &height, &channels, 0);
 	assert(data);
 
-	m_width = width;
-	m_height = height;
+	m_windowWidth = width;
+	m_windowHeight = height;
 
 	glGenTextures(1, &m_id);
 	glBindTexture(GL_TEXTURE_2D, m_id);

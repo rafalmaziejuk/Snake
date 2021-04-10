@@ -27,7 +27,4 @@ public:
 	void set_float(const std::string &name, float value);
 	void set_vec3f(const std::string &name, const glm::vec3 &vec);
 	void set_mat4(const std::string &name, const glm::mat4 &mat);
-
-	static std::shared_ptr<Shader> create_shader(const std::string &name, const std::string &vert, const std::string &frag);
-	static std::shared_ptr<Shader> create_shader(const std::string &name, const std::string &filepath);
 };

@@ -1,13 +1,11 @@
 #include "Application.h"
 #include "Utils/ImGui/ImGuiRenderer.h"
 #include "Utils/InputManager.h"
-#include "Graphics/SpriteRenderer.h"
+#include "Graphics/Renderer.h"
 #include "States/StateIdentifiers.h"
 #include "States/Menu/MenuState.h"
 #include "States/Game/GameState.h"
 #include "States/Game/GameoverState.h"
-#include "Graphics/Shader.h"
-#include "Graphics/Texture.h"
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
@@ -38,8 +36,8 @@ static void key_callback(GLFWwindow *window, int key, int scancode, int action, 
 Application::Application(const std::string &name, uint16_t width, uint16_t height) :
 	m_window(nullptr),
 	m_name(name),
-	m_width(width),
-	m_height(height),
+	m_windowWidth(width),
+	m_windowHeight(height),
 	m_stateManager(State::Context(width, height))
 {
 	std::srand(static_cast<unsigned int>(std::time(nullptr)));
@@ -50,7 +48,7 @@ Application::Application(const std::string &name, uint16_t width, uint16_t heigh
 	glfwWindowHint(GLFW_RESIZABLE, 0);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-	m_window = glfwCreateWindow(m_width, m_height, name.c_str(), nullptr, nullptr);
+	m_window = glfwCreateWindow(m_windowWidth, m_windowHeight, name.c_str(), nullptr, nullptr);
 	assert(m_window);
 
 	glfwMakeContextCurrent(m_window);
@@ -59,15 +57,14 @@ Application::Application(const std::string &name, uint16_t width, uint16_t heigh
 	glfwSwapInterval(1);
 
 	assert(gladLoadGLLoader((GLADloadproc)glfwGetProcAddress));
-	glViewport(0, 0, m_width, m_height);
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
+
+	ImGuiRenderer::init(m_window);
+	Renderer::init(m_windowWidth, m_windowHeight);
+	Renderer::set_viewport(m_windowWidth, m_windowHeight);
+	Renderer::set_clear_color({ 0.2f, 0.2f, 0.2f, 1.0f });
 
 	register_states();
 	m_stateManager.push_state(ID::MENU_STATE);
-
-	ImGuiRenderer::init(m_window);
 }
 
 Application::~Application(void)
@@ -101,9 +98,12 @@ void Application::run(void)
 		if (m_stateManager.is_empty())
 			glfwSetWindowShouldClose(m_window, 1);
 
-		glClear(GL_COLOR_BUFFER_BIT);
+		m_renderer->clear();
 
-		m_stateManager.render();
+		m_stateManager.draw();
+		//ImGuiRenderer::begin();
+		//m_stateManager.imgui_render();
+		//ImGuiRenderer::end(m_windowWidth, m_windowHeight);
 
 		glfwSwapBuffers(m_window);
 	}

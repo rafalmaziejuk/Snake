@@ -19,11 +19,6 @@ void VertexBuffer::bind(void) const
 	glBindBuffer(GL_ARRAY_BUFFER, m_id);
 }
 
-std::shared_ptr<VertexBuffer> VertexBuffer::create_vertex_buffer(const float *data, uint32_t size)
-{
-	return std::make_shared<VertexBuffer>(data, size);
-}
-
 ElementBuffer::ElementBuffer(const uint32_t *data, uint8_t elementCount) :
 	m_elementCount(elementCount)
 {
@@ -40,9 +35,4 @@ ElementBuffer::~ElementBuffer(void)
 void ElementBuffer::bind(void) const
 {
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_id);
-}
-
-std::shared_ptr<ElementBuffer> ElementBuffer::create_element_buffer(const uint32_t *data, uint8_t elementCount)
-{
-    return std::make_shared<ElementBuffer>(data, elementCount);
 }

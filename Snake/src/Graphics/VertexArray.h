@@ -19,6 +19,4 @@ public:
 
 	void set_element_buffer(const std::shared_ptr<ElementBuffer> &elementBuffer);
 	inline const std::shared_ptr<ElementBuffer> & get_element_buffer(void) const { return m_elementBuffer; }
-
-	static std::shared_ptr<VertexArray> create_vertex_array(void);
 };

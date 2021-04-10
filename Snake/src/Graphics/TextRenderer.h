@@ -1,12 +1,13 @@
 #pragma once
 
-#include "Shader.h"
-
 #include <glm/glm.hpp>
 
 #include <memory>
 #include <unordered_map>
 
+class Shader;
+
+//Temporary solution
 class TextRenderer
 {
 private:

@@ -50,7 +50,7 @@ public:
 	template <typename T1, typename T2>
 	inline void register_state(ID stateID, T2 t2);
 
-	void render(void);
+	void draw(void);
 	void update(float timestep);
 	void handle_input(void);
 

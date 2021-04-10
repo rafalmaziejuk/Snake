@@ -7,8 +7,8 @@ class Texture
 {
 private:
 	uint32_t m_id;
-	uint16_t m_width;
-	uint16_t m_height;
+	uint16_t m_windowWidth;
+	uint16_t m_windowHeight;
 
 public:
 	Texture(const std::string &filepath);
