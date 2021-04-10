@@ -51,6 +51,7 @@ public:
 	inline void register_state(ID stateID, T2 t2);
 
 	void draw(void);
+	void imgui_render(void);
 	void update(float timestep);
 	void handle_input(void);
 

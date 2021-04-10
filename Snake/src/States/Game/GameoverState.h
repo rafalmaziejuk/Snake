@@ -16,6 +16,7 @@ public:
 	virtual ~GameoverState(void);
 
 	virtual void draw(void) const override;
+	virtual void imgui_render(void) const override;
 	virtual bool update(float timestep) override;
 	virtual bool handle_input(void) override;
 };

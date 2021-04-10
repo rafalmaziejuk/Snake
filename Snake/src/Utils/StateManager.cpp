@@ -44,6 +44,12 @@ void StateManager::draw(void)
 		state->draw();
 }
 
+void StateManager::imgui_render(void)
+{
+	for (auto &state : m_states)
+		state->imgui_render();
+}
+
 void StateManager::update(float timestep)
 {
 	for (auto &state : m_states)

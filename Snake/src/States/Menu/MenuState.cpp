@@ -26,6 +26,11 @@ void MenuState::draw(void) const
 	m_textRenderer.render_text(ss.str(), { 295.0f, 275.0f }, 1.0f);
 }
 
+void MenuState::imgui_render(void) const
+{
+
+}
+
 bool MenuState::update(float timestep)
 {
 	return true;

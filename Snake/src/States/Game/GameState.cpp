@@ -15,13 +15,14 @@ GameState::~GameState(void)
 
 void GameState::draw(void) const
 {
-	ImGuiRenderer::begin();
+	m_world.draw();
+}
+
+void GameState::imgui_render(void) const
+{
 	ImGui::Begin("FPS");
 	ImGui::Text("%.3f ms / %.1f FPS", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
 	ImGui::End();
-	ImGuiRenderer::end(get_context().m_windowHeight, get_context().m_windowHeight);
-
-	m_world.draw();
 }
 
 bool GameState::update(float timestep)

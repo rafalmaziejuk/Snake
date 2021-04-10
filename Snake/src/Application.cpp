@@ -101,9 +101,9 @@ void Application::run(void)
 		m_renderer->clear();
 
 		m_stateManager.draw();
-		//ImGuiRenderer::begin();
-		//m_stateManager.imgui_render();
-		//ImGuiRenderer::end(m_windowWidth, m_windowHeight);
+		ImGuiRenderer::begin();
+		m_stateManager.imgui_render();
+		ImGuiRenderer::end(m_windowWidth, m_windowHeight);
 
 		glfwSwapBuffers(m_window);
 	}

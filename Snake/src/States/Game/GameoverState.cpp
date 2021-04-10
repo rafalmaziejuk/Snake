@@ -30,6 +30,11 @@ void GameoverState::draw(void) const
 	m_textRenderer.render_text(ss.str(), { 185.0f, 300.0f }, 1.0f);
 }
 
+void GameoverState::imgui_render(void) const
+{
+
+}
+
 bool GameoverState::update(float timestep)
 {
 	return true;
