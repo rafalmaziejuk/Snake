@@ -1,35 +1,37 @@
 #include "World.h"
 #include "../../Utils/InputManager.h"
+#include "../../Graphics/Texture.h"
+#include "../../Graphics/Renderer.h"
 
 #include <GLFW/glfw3.h>
-#include <sstream>
+
+const float World::ROTATION_VELOCITY = 0.0f;
 
 World::World(uint16_t windowWidth, uint16_t windowHeight) :
 	m_inputManager(InputManager::get_instance()),
-	m_textRenderer(windowWidth, windowHeight),
 	m_windowWidth(windowWidth),
 	m_windowHeight(windowHeight),
+	m_background(Texture::create_texture("assets/textures/game_bg.png")),
 	m_snake(windowWidth, windowHeight),
 	m_food(),
 	m_isPlayerAlive(true),
 	m_playerScore(0)
 {
-	m_textRenderer.load("assets/fonts/arial.ttf", 24);
+	m_background.set_position({ static_cast<float>(m_windowWidth) / 2.0f, static_cast<float>(m_windowHeight) / 2.0f });
 	m_food.reset_position(m_snake);
 }
 
 void World::draw(void) const
 {
-	std::stringstream ss; 
-	ss << m_playerScore;
-	m_textRenderer.render_text(ss.str(), { static_cast<float>(m_windowWidth) - 30.0f, 5.0f }, 1.0f);
-
+	Renderer::draw(m_background);
 	m_snake.draw();
 	m_food.draw();
 }
 
 void World::update(float timestep)
 {
+	m_background.rotate(timestep * ROTATION_VELOCITY);
+
 	m_snake.update(timestep);
 
 	if (m_snake.check_collision())

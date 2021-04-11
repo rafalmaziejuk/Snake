@@ -94,3 +94,52 @@ void Renderer::draw(const Sprite &sprite)
 	glDrawElements(GL_TRIANGLES, rendererData.m_spriteVertexArray->get_element_buffer()->get_count(), GL_UNSIGNED_INT, 0);
 	glBindTexture(GL_TEXTURE_2D, 0);
 }
+
+void Renderer::draw(const glm::vec2 &position, const glm::vec2 &size, const std::shared_ptr<Texture> &texture)
+{
+	rendererData.m_spriteShader->bind();
+
+	glm::mat4 model = glm::mat4(1.0f);
+	model = glm::translate(model, glm::vec3(position, 0.0f));
+	model = glm::scale(model, glm::vec3(size, 1.0f));
+	rendererData.m_spriteShader->set_mat4("model", model);
+
+	texture->bind(GL_TEXTURE0);
+
+	rendererData.m_spriteVertexArray->bind();
+	glDrawElements(GL_TRIANGLES, rendererData.m_spriteVertexArray->get_element_buffer()->get_count(), GL_UNSIGNED_INT, 0);
+	glBindTexture(GL_TEXTURE_2D, 0);
+}
+
+void Renderer::draw(const glm::vec2 &position, const std::shared_ptr<Texture> &texture)
+{
+	rendererData.m_spriteShader->bind();
+
+	glm::mat4 model = glm::mat4(1.0f);
+	model = glm::translate(model, glm::vec3(position, 0.0f));
+	model = glm::scale(model, glm::vec3(texture->get_size(), 1.0f));
+	rendererData.m_spriteShader->set_mat4("model", model);
+
+	texture->bind(GL_TEXTURE0);
+
+	rendererData.m_spriteVertexArray->bind();
+	glDrawElements(GL_TRIANGLES, rendererData.m_spriteVertexArray->get_element_buffer()->get_count(), GL_UNSIGNED_INT, 0);
+	glBindTexture(GL_TEXTURE_2D, 0);
+}
+
+void Renderer::draw(const glm::vec2 &position, float rotation, const std::shared_ptr<Texture> &texture)
+{
+	rendererData.m_spriteShader->bind();
+
+	glm::mat4 model = glm::mat4(1.0f);
+	model = glm::translate(model, glm::vec3(position, 0.0f));
+	model = glm::rotate(model, glm::radians(rotation), glm::vec3(0.0f, 0.0f, 1.0f));
+	model = glm::scale(model, glm::vec3(texture->get_size(), 1.0f));
+	rendererData.m_spriteShader->set_mat4("model", model);
+
+	texture->bind(GL_TEXTURE0);
+
+	rendererData.m_spriteVertexArray->bind();
+	glDrawElements(GL_TRIANGLES, rendererData.m_spriteVertexArray->get_element_buffer()->get_count(), GL_UNSIGNED_INT, 0);
+	glBindTexture(GL_TEXTURE_2D, 0);
+}

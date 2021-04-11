@@ -42,7 +42,7 @@ private:
 		
 		inline void rotate(float angle)
 		{
-			m_sprite.set_angle(m_sprite.get_angle() + angle);
+			m_sprite.rotate(angle);
 		}
 	};
 

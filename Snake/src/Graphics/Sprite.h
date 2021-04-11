@@ -19,7 +19,7 @@ public:
 	Sprite(const std::shared_ptr<Texture> &texture) :
 		m_texture(texture),
 		m_position(),
-		m_size(),
+		m_size(texture->get_size()),
 		m_angle(0.0f)
 	{
 
@@ -58,5 +58,9 @@ public:
 		
 		if (m_angle < 0)
 			m_angle += 360.0f;
+	}
+	inline void rotate(float angle)
+	{
+		set_angle(m_angle + angle);
 	}
 };
