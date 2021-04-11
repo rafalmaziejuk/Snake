@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../State.h"
+#include "../../Graphics/Sprite.h"
 
 #include <memory>
 
@@ -16,6 +17,8 @@ private:
 	InputManager &m_inputManager;
 
 private:
+	Sprite m_playButton;
+	Sprite m_exitButton;
 	std::shared_ptr<Texture> m_menu;
 	std::shared_ptr<Texture> m_background;
 	float m_bgHorizontalPos1;

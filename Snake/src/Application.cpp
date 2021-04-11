@@ -33,6 +33,25 @@ static void key_callback(GLFWwindow *window, int key, int scancode, int action, 
 	}
 }
 
+static void cursor_position_callback(GLFWwindow *window, double x, double y)
+{
+	InputManager::get_instance().mouse_move(x, y);
+}
+
+void mouse_button_callback(GLFWwindow* window, int button, int action, int mode)
+{
+	switch (action)
+	{
+		case GLFW_PRESS:
+			InputManager::get_instance().key_press(button);
+			break;
+
+		case GLFW_RELEASE:
+			InputManager::get_instance().key_release(button);
+			break;
+	}
+}
+
 Application::Application(const std::string &name, uint16_t width, uint16_t height) :
 	m_window(nullptr),
 	m_name(name),
@@ -54,6 +73,8 @@ Application::Application(const std::string &name, uint16_t width, uint16_t heigh
 	glfwMakeContextCurrent(m_window);
 	glfwSetFramebufferSizeCallback(m_window, resize_callback);
 	glfwSetKeyCallback(m_window, key_callback);
+	glfwSetCursorPosCallback(m_window, cursor_position_callback);
+	glfwSetMouseButtonCallback(m_window, mouse_button_callback);
 	glfwSwapInterval(1);
 
 	assert(gladLoadGLLoader((GLADloadproc)glfwGetProcAddress));
