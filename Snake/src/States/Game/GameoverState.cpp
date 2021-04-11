@@ -5,11 +5,15 @@
 
 #include <GLFW/glfw3.h>
 
+#include <sstream>
+
 const float GameoverState::BG_SCROLL_VELOCITY = 15.0f;
+extern uint16_t playerScore;
 
 GameoverState::GameoverState(StateManager &stateManager, Context context) :
 	State(stateManager, context),
 	m_inputManager(InputManager::get_instance()),
+	m_textRenderer(get_context().m_windowWidth, get_context().m_windowHeight),
 	m_replayButton(Texture::create_texture("assets/textures/replay_button.png")),
 	m_exitButton(Texture::create_texture("assets/textures/exit_button.png")),
 	m_overlay(Texture::create_texture("assets/textures/gameover.png")),
@@ -17,6 +21,8 @@ GameoverState::GameoverState(StateManager &stateManager, Context context) :
 	m_bgHorizontalPos1(static_cast<float>(m_background->get_width()) / 2.0f),
 	m_bgHorizontalPos2(-static_cast<float>(m_background->get_width()) / 2.0f + 10.0f)
 {
+	m_textRenderer.load("assets/fonts/EdgeOfTheGalaxyRegular.otf", 70);
+
 	m_replayButton.set_scale(0.80f);
 	m_replayButton.set_position
 	(
@@ -48,11 +54,21 @@ void GameoverState::draw(void) const
 	Renderer::draw({ get_context().m_windowWidth / 2, get_context().m_windowHeight / 2 }, m_overlay);
 	Renderer::draw(m_replayButton);
 	Renderer::draw(m_exitButton);
+
+	std::stringstream ss;
+	if (playerScore < 10)
+		ss << "00" << playerScore;
+	else if (playerScore >= 10 && playerScore < 100)
+		ss << "0" << playerScore;
+	else
+		ss << playerScore;
+
+	m_textRenderer.render_text(ss.str(), { 345.0f, 145.0f }, 1.0f);
 }
 
 void GameoverState::imgui_render(void) const
 {
-
+	
 }
 
 bool GameoverState::update(float timestep)

@@ -20,7 +20,7 @@ MenuState::MenuState(StateManager &stateManager, Context context) :
 	m_playButton.set_scale(0.80f);
 	m_playButton.set_position
 	(
-		{ 
+		{
 			static_cast<float>(get_context().m_windowWidth / 2.0f) + 5.0f,
 			static_cast<float>(get_context().m_windowHeight / 2.0f)
 		}

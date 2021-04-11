@@ -2,6 +2,7 @@
 
 #include "../State.h"
 #include "../../Graphics/Sprite.h"
+#include "../../Graphics/TextRenderer.h"
 
 #include <memory>
 
@@ -11,6 +12,7 @@ class GameoverState : public State
 {
 private:
 	InputManager &m_inputManager;
+	TextRenderer m_textRenderer;
 
 private:
 	static const float BG_SCROLL_VELOCITY;

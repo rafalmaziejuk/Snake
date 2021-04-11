@@ -5,7 +5,6 @@ GameState::GameState(StateManager &stateManager, Context context) :
 	State(stateManager, context),
 	m_world(context.m_windowWidth, context.m_windowHeight)
 {
-
 }
 
 GameState::~GameState(void)
@@ -20,9 +19,9 @@ void GameState::draw(void) const
 
 void GameState::imgui_render(void) const
 {
-	ImGui::Begin("FPS");
+	/*ImGui::Begin("FPS");
 	ImGui::Text("%.3f ms / %.1f FPS", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
-	ImGui::End();
+	ImGui::End();*/
 }
 
 bool GameState::update(float timestep)

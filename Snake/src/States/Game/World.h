@@ -2,6 +2,7 @@
 
 #include "Snake.h"
 #include "../../Graphics/Sprite.h"
+#include "../../Graphics/TextRenderer.h"
 
 #include <memory>
 
@@ -17,6 +18,7 @@ private:
 
 private:
 	InputManager &m_inputManager;
+	TextRenderer m_textRenderer;
 
 private:
 	uint16_t m_windowWidth;
@@ -26,7 +28,6 @@ private:
 	Snake m_snake;
 	Food m_food;
 	bool m_isPlayerAlive;
-	uint16_t m_playerScore;
 
 public:
 	World(uint16_t windowWidth, uint16_t windowHeight);

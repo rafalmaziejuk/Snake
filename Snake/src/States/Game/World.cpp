@@ -5,20 +5,26 @@
 
 #include <GLFW/glfw3.h>
 
+#include <sstream>
+
 const float World::ROTATION_VELOCITY = 0.5f;
+uint16_t playerScore;
 
 World::World(uint16_t windowWidth, uint16_t windowHeight) :
 	m_inputManager(InputManager::get_instance()),
+	m_textRenderer(windowWidth, windowHeight),
 	m_windowWidth(windowWidth),
 	m_windowHeight(windowHeight),
 	m_background(Texture::create_texture("assets/textures/game_bg.png")),
 	m_snake(windowWidth, windowHeight),
 	m_food(),
-	m_isPlayerAlive(true),
-	m_playerScore(0)
+	m_isPlayerAlive(true)
 {
+	m_textRenderer.load("assets/fonts/EdgeOfTheGalaxyRegular.otf", 25);
+
 	m_background.set_position({ static_cast<float>(m_windowWidth) / 2.0f, static_cast<float>(m_windowHeight) / 2.0f });
 	m_food.reset_position(m_snake);
+	playerScore = 0;
 }
 
 void World::draw(void) const
@@ -26,6 +32,16 @@ void World::draw(void) const
 	Renderer::draw(m_background);
 	m_snake.draw();
 	m_food.draw();
+
+	std::stringstream ss;
+	if (playerScore < 10)
+		ss << "00" << playerScore;
+	else if (playerScore >= 10 && playerScore < 100)
+		ss << "0" << playerScore;
+	else
+		ss << playerScore;
+
+	m_textRenderer.render_text(ss.str(), { static_cast<float>(m_windowWidth) - 50.0f, 5.0f }, 1.0f);
 }
 
 void World::update(float timestep)
@@ -40,7 +56,7 @@ void World::update(float timestep)
 
 	if (m_snake.check_collision_with_food(m_food))
 	{
-		m_playerScore++;
+		playerScore++;
 		m_food.reset_position(m_snake);
 		m_snake.extend();
 	}
