@@ -5,17 +5,17 @@
 
 #include <GLFW/glfw3.h>
 
-const float MenuState::BG_SCROLL_VELOCITY = 20.0f;
+const float MenuState::BG_SCROLL_VELOCITY = 15.0f;
 
 MenuState::MenuState(StateManager &stateManager, Context context) :
 	State(stateManager, context),
 	m_inputManager(InputManager::get_instance()),
 	m_playButton(Texture::create_texture("assets/textures/play_button.png")),
 	m_exitButton(Texture::create_texture("assets/textures/exit_button.png")),
-	m_menu(Texture::create_texture("assets/textures/menu.png")),
+	m_overlay(Texture::create_texture("assets/textures/menu.png")),
 	m_background(Texture::create_texture("assets/textures/menu_bg.png")),
 	m_bgHorizontalPos1(static_cast<float>(m_background->get_width()) / 2.0f),
-	m_bgHorizontalPos2(-static_cast<float>(m_background->get_width()) / 2.0f)
+	m_bgHorizontalPos2(-static_cast<float>(m_background->get_width()) / 2.0f + 10.0f)
 {
 	m_playButton.set_scale(0.80f);
 	m_playButton.set_position
@@ -45,7 +45,7 @@ void MenuState::draw(void) const
 {
 	Renderer::draw({ m_bgHorizontalPos1, get_context().m_windowHeight / 2 }, m_background);
 	Renderer::draw({ m_bgHorizontalPos2, get_context().m_windowHeight / 2 }, m_background);
-	Renderer::draw({ get_context().m_windowWidth / 2, get_context().m_windowHeight / 2 }, m_menu);
+	Renderer::draw({ get_context().m_windowWidth / 2, get_context().m_windowHeight / 2 }, m_overlay);
 	Renderer::draw(m_playButton);
 	Renderer::draw(m_exitButton);
 }

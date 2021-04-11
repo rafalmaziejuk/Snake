@@ -3,7 +3,7 @@
 #include "../../Graphics/Renderer.h"
 #include "../../Graphics/Texture.h"
 
-const float Snake::SEGMENT_SIZE = 32.0f;
+#include <GLFW/glfw3.h>
 
 Snake::Snake(uint16_t windowWidth, uint16_t windowHeight) :
 	m_windowWidth(windowWidth),
@@ -16,7 +16,8 @@ Snake::Snake(uint16_t windowWidth, uint16_t windowHeight) :
 
 void Snake::add_segment(const glm::vec2 &position)
 {
-	m_segments.push_back(Sprite(m_segmentTexture, position, { SEGMENT_SIZE, SEGMENT_SIZE }));
+	Sprite sprite(m_segmentTexture, position, { 32.0f, 32.0f });
+	m_segments.push_back(sprite);
 }
 
 void Snake::draw(void) const
@@ -63,7 +64,7 @@ bool Snake::check_collision(void) const
 	{
 		for (auto it = m_segments.begin() + INIT_SNAKE_LENGTH; it != m_segments.end(); it++)
 		{
-			if (glm::distance(headPosition, it->m_sprite.get_position()) < SEGMENT_SIZE)
+			if (glm::distance(headPosition, it->m_sprite.get_position()) < COLLISION_DISTANCE)
 				return true;
 		}
 	}
@@ -76,7 +77,7 @@ bool Snake::check_collision_with_food(const Food &food)
 	auto &foodPosition = food.m_sprite.get_position();
 	auto &headPosition = m_segments.begin()->m_sprite.get_position();
 
-	if (glm::distance(headPosition, foodPosition) < SEGMENT_SIZE)
+	if (glm::distance(headPosition, foodPosition) < COLLISION_DISTANCE)
 		return true;
 
 	return false;
@@ -91,7 +92,7 @@ void Snake::extend(void)
 Food::Food(void) :
 	m_sprite(Texture::create_texture("assets/textures/food.png"))
 {
-	m_sprite.set_size({ Snake::SEGMENT_SIZE, Snake::SEGMENT_SIZE });
+	m_sprite.set_size({ 32.0f, 32.0f });
 }
 
 void Food::draw(void) const
@@ -99,8 +100,22 @@ void Food::draw(void) const
 	Renderer::draw(m_sprite);
 }
 
+void Food::update(void)
+{
+	float angle = sinf(static_cast<float>(glfwGetTime()));
+	float scale = glm::clamp(angle, 0.60f, 0.65f);
+	m_sprite.set_angle(glm::degrees(angle));
+	m_sprite.set_scale(scale);
+}
+
 void Food::reset_position(const Snake &snake)
 {
-	m_sprite.set_position({ static_cast<float>(rand() % snake.m_windowWidth) * 0.8f + static_cast<float>(snake.m_windowWidth) * 0.1f,
-							static_cast<float>(rand() % snake.m_windowHeight) * 0.8f + static_cast<float>(snake.m_windowHeight) * 0.1f });
+	//TODO: change to window size
+	m_sprite.set_position
+	(
+		{ 
+			static_cast<float>(rand() % 800) * 0.8f + 800.0f * 0.1f,
+			static_cast<float>(rand() % 600) * 0.8f + 600.0f * 0.1f 
+		}
+	);
 }

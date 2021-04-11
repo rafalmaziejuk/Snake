@@ -1,6 +1,9 @@
 #pragma once
 
 #include "../State.h"
+#include "../../Graphics/Sprite.h"
+
+#include <memory>
 
 class InputManager;
 
@@ -8,6 +11,16 @@ class GameoverState : public State
 {
 private:
 	InputManager &m_inputManager;
+
+private:
+	static const float BG_SCROLL_VELOCITY;
+
+	Sprite m_replayButton;
+	Sprite m_exitButton;
+	std::shared_ptr<Texture> m_overlay;
+	std::shared_ptr<Texture> m_background;
+	float m_bgHorizontalPos1;
+	float m_bgHorizontalPos2;
 
 public:
 	GameoverState(StateManager &stateManager, Context context);

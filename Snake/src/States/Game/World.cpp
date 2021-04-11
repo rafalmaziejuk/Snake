@@ -5,7 +5,7 @@
 
 #include <GLFW/glfw3.h>
 
-const float World::ROTATION_VELOCITY = 0.0f;
+const float World::ROTATION_VELOCITY = 0.5f;
 
 World::World(uint16_t windowWidth, uint16_t windowHeight) :
 	m_inputManager(InputManager::get_instance()),
@@ -33,6 +33,7 @@ void World::update(float timestep)
 	m_background.rotate(timestep * ROTATION_VELOCITY);
 
 	m_snake.update(timestep);
+	m_food.update();
 
 	if (m_snake.check_collision())
 		m_isPlayerAlive = false;

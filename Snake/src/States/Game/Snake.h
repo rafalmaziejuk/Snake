@@ -12,7 +12,7 @@ class Food;
 class Snake
 {
 private:
-	static const float SEGMENT_SIZE;
+	const float COLLISION_DISTANCE = 16.0f;
 	const float SPACING = 20.0f;
 	const float VELOCITY = 5.0f;
 	const float ROTATION_SPEED = 5.0f;
@@ -68,8 +68,6 @@ public:
 	bool check_collision(void) const;
 	bool check_collision_with_food(const Food &food);
 	void extend(void);
-
-	friend class Food;
 };
 
 class Food
@@ -81,6 +79,7 @@ public:
 	Food(void);
 
 	void draw(void) const;
+	void update(void);
 	void reset_position(const Snake &snake);
 
 	friend class Snake;

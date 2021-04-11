@@ -82,7 +82,7 @@ Application::Application(const std::string &name, uint16_t width, uint16_t heigh
 	ImGuiRenderer::init(m_window);
 	Renderer::init(m_windowWidth, m_windowHeight);
 	Renderer::set_viewport(m_windowWidth, m_windowHeight);
-	Renderer::set_clear_color({ 0.2f, 0.2f, 0.2f, 1.0f });
+	Renderer::set_clear_color({ 0.0f, 0.0f, 0.0f, 1.0f });
 
 	register_states();
 	m_stateManager.push_state(ID::MENU_STATE);
