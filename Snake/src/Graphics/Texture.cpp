@@ -5,7 +5,7 @@
 
 #include <cassert>
 
-std::shared_ptr<Texture> Texture::create_texture(const std::string &filepath)
+std::shared_ptr<Texture> Texture::create(const std::string &filepath)
 {
 	return std::make_shared<Texture>(filepath);
 }

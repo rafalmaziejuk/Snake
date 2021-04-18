@@ -21,7 +21,5 @@ public:
 	static void clear(void);
 
 	static void draw(const Sprite &sprite);
-	static void draw(const glm::vec2 &position, const glm::vec2 &size, const std::shared_ptr<Texture> &texture);
 	static void draw(const glm::vec2 &position, const std::shared_ptr<Texture> &texture);
-	static void draw(const glm::vec2 &position, float rotation, const std::shared_ptr<Texture> &texture);
 };

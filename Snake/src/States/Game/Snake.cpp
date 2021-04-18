@@ -8,7 +8,7 @@
 Snake::Snake(uint16_t windowWidth, uint16_t windowHeight) :
 	m_windowWidth(windowWidth),
 	m_windowHeight(windowHeight),
-	m_segmentTexture(Texture::create_texture("assets/textures/snake_segment.png"))
+	m_segmentTexture(Texture::create("assets/textures/snake_segment.png"))
 {
 	for (uint8_t i = 0; i < INIT_SNAKE_LENGTH; i++)
 		add_segment({ windowWidth / 2, windowHeight / 2 });
@@ -90,7 +90,7 @@ void Snake::extend(void)
 }
 
 Food::Food(void) :
-	m_sprite(Texture::create_texture("assets/textures/food.png"))
+	m_sprite(Texture::create("assets/textures/food.png"))
 {
 	m_sprite.set_size({ 32.0f, 32.0f });
 }

@@ -14,10 +14,10 @@ GameoverState::GameoverState(StateManager &stateManager, Context context) :
 	State(stateManager, context),
 	m_inputManager(InputManager::get_instance()),
 	m_textRenderer(get_context().m_windowWidth, get_context().m_windowHeight),
-	m_replayButton(Texture::create_texture("assets/textures/replay_button.png")),
-	m_exitButton(Texture::create_texture("assets/textures/exit_button.png")),
-	m_overlay(Texture::create_texture("assets/textures/gameover.png")),
-	m_background(Texture::create_texture("assets/textures/menu_bg.png")),
+	m_replayButton(Texture::create("assets/textures/replay_button.png")),
+	m_exitButton(Texture::create("assets/textures/exit_button.png")),
+	m_overlay(Texture::create("assets/textures/gameover.png")),
+	m_background(Texture::create("assets/textures/menu_bg.png")),
 	m_bgHorizontalPos1(static_cast<float>(m_background->get_width()) / 2.0f),
 	m_bgHorizontalPos2(-static_cast<float>(m_background->get_width()) / 2.0f + 10.0f)
 {

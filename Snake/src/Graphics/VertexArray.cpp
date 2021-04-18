@@ -30,7 +30,7 @@ void VertexArray::set_vertex_buffer(const std::shared_ptr<VertexBuffer> &vertexB
 	bind();
 	vertexBuffer->bind();
 
-	//Iterate through layout vertex buffer elements
+	//Iterate through layout's vertex buffer elements
 	const auto &layout = vertexBuffer->get_layout();
 	for (uint8_t i = 0; i < layout.get_vbelement_count(); i++)
 	{

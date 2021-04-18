@@ -87,11 +87,11 @@ void Shader::compile(std::unordered_map<GLenum, std::string> shaderSources)
 	glAttachShader(m_id, vertexShader);
 	glAttachShader(m_id, fragmentShader);
 	glLinkProgram(m_id);
-	glGetProgramiv(m_id, GL_COMPILE_STATUS, &isCompiled);
+	glGetProgramiv(m_id, GL_LINK_STATUS, &isCompiled);
 	if (isCompiled == GL_FALSE)
 	{
 		GLint length;
-		glGetProgramiv(fragmentShader, GL_INFO_LOG_LENGTH, &length);
+		glGetProgramiv(m_id, GL_INFO_LOG_LENGTH, &length);
 		std::vector<GLchar> infoLog(length);
 		glGetProgramInfoLog(m_id, length, &length, &infoLog[0]);
 

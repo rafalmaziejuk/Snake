@@ -1,7 +1,6 @@
 #pragma once
 
 #include <vector>
-#include <cstdint>
 #include <memory>
 #include <initializer_list>
 
@@ -35,7 +34,7 @@ private:
 		uint32_t m_size;
 		Type m_type;
 		bool m_normalized;
-		uint16_t m_offset;
+		size_t m_offset;
 
 		VBElement(Type type, bool normalized = false) :
 			m_size(get_type_size(type)),
@@ -107,18 +106,22 @@ public:
 	inline void set_layout(const BufferLayout &layout) { m_layout = layout; }
 	inline const BufferLayout & get_layout(void) const { return m_layout; }
 	void bind(void) const;
+
+	static std::shared_ptr<VertexBuffer> create(const float *data, uint32_t size);
 };
 
 class ElementBuffer
 {
 private:
 	uint32_t m_id;
-	uint8_t m_elementCount;
+	uint32_t m_elementCount;
 
 public:
-	ElementBuffer(const uint32_t *data, uint8_t elementCount);
+	ElementBuffer(const uint32_t *data, uint32_t elementCount);
 	~ElementBuffer(void);
 
-	inline uint8_t get_count(void) const { return m_elementCount; }
+	inline uint32_t get_count(void) const { return m_elementCount; }
 	void bind(void) const;
+
+	static std::shared_ptr<ElementBuffer> create(const uint32_t *data, uint32_t elementCount);
 };

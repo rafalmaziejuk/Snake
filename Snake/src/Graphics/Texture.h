@@ -22,5 +22,5 @@ public:
 	inline uint16_t get_height(void) const { return m_height; }
 	inline glm::vec2 get_size(void) const { return { m_width, m_height }; }
 
-	static std::shared_ptr<Texture> create_texture(const std::string &filepath);
+	static std::shared_ptr<Texture> create(const std::string &filepath);
 };

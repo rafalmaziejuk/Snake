@@ -15,7 +15,7 @@ World::World(uint16_t windowWidth, uint16_t windowHeight) :
 	m_textRenderer(windowWidth, windowHeight),
 	m_windowWidth(windowWidth),
 	m_windowHeight(windowHeight),
-	m_background(Texture::create_texture("assets/textures/game_bg.png")),
+	m_background(Texture::create("assets/textures/game_bg.png")),
 	m_snake(windowWidth, windowHeight),
 	m_food(),
 	m_isPlayerAlive(true)

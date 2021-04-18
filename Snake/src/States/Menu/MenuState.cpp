@@ -10,10 +10,10 @@ const float MenuState::BG_SCROLL_VELOCITY = 15.0f;
 MenuState::MenuState(StateManager &stateManager, Context context) :
 	State(stateManager, context),
 	m_inputManager(InputManager::get_instance()),
-	m_playButton(Texture::create_texture("assets/textures/play_button.png")),
-	m_exitButton(Texture::create_texture("assets/textures/exit_button.png")),
-	m_overlay(Texture::create_texture("assets/textures/menu.png")),
-	m_background(Texture::create_texture("assets/textures/menu_bg.png")),
+	m_playButton(Texture::create("assets/textures/play_button.png")),
+	m_exitButton(Texture::create("assets/textures/exit_button.png")),
+	m_overlay(Texture::create("assets/textures/menu.png")),
+	m_background(Texture::create("assets/textures/menu_bg.png")),
 	m_bgHorizontalPos1(static_cast<float>(m_background->get_width()) / 2.0f),
 	m_bgHorizontalPos2(-static_cast<float>(m_background->get_width()) / 2.0f + 10.0f)
 {
