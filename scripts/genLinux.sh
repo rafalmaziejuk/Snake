@@ -18,5 +18,7 @@ then
 	make			
 elif [ "$1" = "run" ]
 then
-	./bin/Debug-linux-x86_64/Snake/Snake		
+	cp -R Snake/assets bin/Debug-linux-x86_64/Snake
+	cd bin/Debug-linux-x86_64/Snake
+	./Snake		
 fi
