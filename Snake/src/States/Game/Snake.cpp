@@ -22,13 +22,13 @@ void Snake::add_segment(const glm::vec2 &position)
 
 void Snake::draw(void) const
 {
-	for (auto &segment : m_segments)
+	for (const auto &segment : m_segments)
 		Renderer::draw(segment.m_sprite);
 }
 
 void Snake::update(float timestep)
 {
-	auto &headSprite = m_segments.begin()->m_sprite;
+	auto headSprite = m_segments.begin()->m_sprite;
 	glm::vec2 headVector;
 
 	headVector.x =  cosf(glm::radians(90.0f - headSprite.get_angle())) * VELOCITY;
@@ -37,8 +37,8 @@ void Snake::update(float timestep)
 
 	for (auto it = m_segments.begin() + 1; it != m_segments.end(); it++)
 	{
-		auto &currentPosition = it->m_sprite.get_position();
-		auto &previousPosition = (it - 1)->m_sprite.get_position();
+		auto currentPosition = it->m_sprite.get_position();
+		auto previousPosition = (it - 1)->m_sprite.get_position();
 
 		float distance = glm::distance(currentPosition, previousPosition);
 
@@ -54,7 +54,7 @@ void Snake::update(float timestep)
 
 bool Snake::check_collision(void) const
 {
-	auto &headPosition = m_segments.begin()->m_sprite.get_position();
+	auto headPosition = m_segments.begin()->m_sprite.get_position();
 
 	if (headPosition.x < 0.0f || headPosition.x > static_cast<float>(m_windowWidth) ||
 		headPosition.y < 0.0f || headPosition.y > static_cast<float>(m_windowHeight))
@@ -74,8 +74,8 @@ bool Snake::check_collision(void) const
 
 bool Snake::check_collision_with_food(const Food &food)
 {
-	auto &foodPosition = food.m_sprite.get_position();
-	auto &headPosition = m_segments.begin()->m_sprite.get_position();
+	auto foodPosition = food.m_sprite.get_position();
+	auto headPosition = m_segments.begin()->m_sprite.get_position();
 
 	if (glm::distance(headPosition, foodPosition) < COLLISION_DISTANCE)
 		return true;
@@ -85,7 +85,7 @@ bool Snake::check_collision_with_food(const Food &food)
 
 void Snake::extend(void)
 {
-	auto &tailPosition = (m_segments.end() - 1)->m_sprite.get_position();
+	auto tailPosition = (m_segments.end() - 1)->m_sprite.get_position();
 	add_segment(tailPosition);
 }
 

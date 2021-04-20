@@ -4,6 +4,7 @@
 #include <glad/glad.h>
 
 #include <iostream>
+#include <vector>
 
 Shader::Shader(const std::string &name, const std::string &vert, const std::string &frag) :
 	m_name(name)

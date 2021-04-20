@@ -9,3 +9,6 @@ bin-int/
 **.vcxproj
 **.vcxproj.filters
 **.vcxproj.user
+
+Makefile
+.vscode

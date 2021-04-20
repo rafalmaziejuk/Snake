@@ -33,19 +33,42 @@ project "Snake"
 		"%{IncludeDir.freetype}"
 	}
 
-	links
-	{
-		"glfw",
-		"glad",
-		"imgui",
-		"freetype",
-		"opengl32.lib"
-	}
-
 	filter "system:windows"
 		systemversion "latest"
 
 		defines { }
+
+		links
+		{
+			"glfw",
+			"glad",
+			"imgui",
+			"freetype",
+			"opengl32.lib"
+		}
+
+	filter "system:linux"
+		systemversion "latest"
+			
+		links
+		{
+			"glfw",
+			"glad",
+			"imgui",
+			"freetype"
+		}
+		
+		linkoptions
+		{
+			"-std=c++17",
+			"-pthread",
+			"-lm",
+			"-Wl,--no-as-needed",
+			"-ldl",
+			"-lGL",
+			"-lXmu",
+			"-lX11"
+		}
 
 	filter "configurations:Debug"
 		runtime "Debug"
