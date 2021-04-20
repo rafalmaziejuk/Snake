@@ -35,13 +35,17 @@ A         | D
 Start by cloning the repository with `git clone --recursive https://github.com/rafalmaziejuk/Snake`.  
 If you cloned the repository without `--recursive` option, use `git submodule update --init`.
 
-Run `generate_project.bat` for Visual Studio 2019 project generation, launch *.sln file and build Solution.
+### Windows
+Open `scripts` folder and run `genWindows.bat` for Visual Studio 2019 project generation, launch *.sln file and build Solution.
+
+### Linux
+Open `scripts` folder, run `sh genLinux.sh build` and then `sh genLinux.sh run`.
 
 # TODO
 * 2D batch renderer
-* Improve text rendering
-* Post-processing effects
-* Particles
-* Perhaps move OpenGL "engine" stuff to the other project
+* Refactor Singleton classes (TextRenderer, InputManager)
 * Events handling
-* Passing data between states
+* Texture atlasses loading
+* Particles
+* Post-processing effects
+* Sounds
