@@ -1,16 +1,16 @@
-[submodule "Snake/vendor/glfw"]
-	path = Snake/vendor/glfw
+[submodule "Engine/vendor/glfw"]
+	path = Engine/vendor/glfw
 	url = https://github.com/rafalmaziejuk/glfw.git
 	branch = master
-[submodule "Snake/vendor/glm"]
-	path = Snake/vendor/glm
+[submodule "Engine/vendor/glm"]
+	path = Engine/vendor/glm
 	url = https://github.com/g-truc/glm
 	branch = master
-[submodule "Snake/vendor/imgui"]
-	path = Snake/vendor/imgui
+[submodule "Engine/vendor/imgui"]
+	path = Engine/vendor/imgui
 	url = https://github.com/rafalmaziejuk/imgui.git
 	branch = master
-[submodule "Snake/vendor/freetype"]
-	path = Snake/vendor/freetype
+[submodule "Engine/vendor/freetype"]
+	path = Engine/vendor/freetype
 	url = https://github.com/rafalmaziejuk/freetype.git
 	branch = master

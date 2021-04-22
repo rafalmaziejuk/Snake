@@ -1,15 +1,15 @@
-#include "FileIO.h"
+#include "Engine/Utils/FileIO.h"
+#include "Engine/Core/EngineAssert.h"
 
 #include <fstream>
 #include <sstream>
-#include <cassert>
 
 std::string FileIO::file_read(const std::string &filepath)
 {
 	std::string line;
 	std::stringstream stream;
 	std::ifstream sourceFile(filepath);
-	assert(sourceFile.is_open());
+	EN_ASSERT(sourceFile.is_open());
 
 	while (getline(sourceFile, line))
 		stream << line << '\n';
