@@ -23,6 +23,11 @@ namespace Engine
 
 		}
 
+		void on_event(Event &e)
+		{
+
+		}
+
 		virtual void on_update(float timestep) override
 		{ 
 			

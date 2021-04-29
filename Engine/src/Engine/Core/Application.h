@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Engine/Core/Window.h"
+#include "Engine/Events/Event.h"
 
 int main(void);
 
@@ -21,6 +22,7 @@ namespace Engine
 		bool m_isRunning = true;
 
 	private:
+		bool on_window_close(WindowCloseEvent &e);
 		void run(void);
 
 	public:
@@ -31,6 +33,7 @@ namespace Engine
 		Window & get_window(void) { return *m_window; }
 		static Application & get(void) { return *appInstance; }
 
+		void on_event(Event &e);
 		virtual void on_update(float timestep) {  }
 		virtual void on_render(void) {  }
 		virtual void on_imgui_render(void) {  }
