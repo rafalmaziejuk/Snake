@@ -3,14 +3,11 @@
 
 #include <glad/glad.h>
 
-#include <cassert>
-
 namespace Engine
 {
 
 	Window::Window(const std::string &name, uint16_t width, uint16_t height) :
 		m_windowHandle(nullptr),
-		m_name(name),
 		m_width(width),
 		m_height(height)
 	{
@@ -24,7 +21,7 @@ namespace Engine
 		glfwWindowHint(GLFW_RESIZABLE, 0);
 		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-		m_windowHandle = glfwCreateWindow(m_width, m_height, name.c_str(), nullptr, nullptr);
+		m_windowHandle = glfwCreateWindow(m_width, m_height, m_name.c_str(), nullptr, nullptr);
 		EN_ASSERT(m_windowHandle);
 
 		glfwMakeContextCurrent(m_windowHandle);

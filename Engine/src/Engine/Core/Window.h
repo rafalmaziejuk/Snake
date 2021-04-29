@@ -2,6 +2,7 @@
 
 #include <GLFW/glfw3.h>
 
+#include <functional>
 #include <cstdint>
 #include <string>
 #include <memory>
@@ -18,7 +19,7 @@ namespace Engine
 		uint16_t m_height;
 
 	public:
-		Window(const std::string &name, uint16_t width = 800, uint16_t height = 600);
+		Window(const std::string &name, uint16_t width, uint16_t height);
 		~Window(void);
 
 		void update(void);

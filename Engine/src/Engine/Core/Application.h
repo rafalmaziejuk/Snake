@@ -27,8 +27,13 @@ namespace Engine
 		Application(const std::string &name);
 		virtual ~Application(void);
 
+		void close(void);
 		Window & get_window(void) { return *m_window; }
 		static Application & get(void) { return *appInstance; }
+
+		virtual void on_update(float timestep) {  }
+		virtual void on_render(void) {  }
+		virtual void on_imgui_render(void) {  }
 	};
 
 	Application * create_application(void);

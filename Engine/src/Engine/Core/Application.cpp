@@ -1,7 +1,7 @@
 #include "Engine/Core/Application.h"
 #include "Engine/Core/EngineAssert.h"
-
 #include "Engine/Graphics/Renderer.h"
+#include "Engine/ImGui/ImGuiRenderer.h"
 
 namespace Engine
 {
@@ -18,12 +18,19 @@ namespace Engine
 		Renderer::init(m_window->get_width(), m_window->get_height());
 		Renderer::set_viewport(m_window->get_width(), m_window->get_height());
 		Renderer::set_clear_color({ 0.0f, 0.0f, 0.0f, 1.0f });
+
+		ImGuiRenderer::init();
 	}
 
 	Application::~Application(void)
 	{
 		Renderer::shutdown();
 	}
+
+    void Application::close(void)
+    {
+		m_isRunning = false;
+    }
 
 	void Application::run(void)
 	{
@@ -35,7 +42,15 @@ namespace Engine
 			float timestep = time - timeSinceLastUpdate;
 			timeSinceLastUpdate = time;
 
+			on_update(timestep);
+
 			Renderer::clear();
+
+			on_render();
+
+			ImGuiRenderer::begin();
+			on_imgui_render();
+			ImGuiRenderer::end();
 
 			m_window->update();
 		}
