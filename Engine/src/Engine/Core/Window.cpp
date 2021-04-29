@@ -1,6 +1,8 @@
 #include "Engine/Core/Window.h"
 #include "Engine/Core/EngineAssert.h"
-#include "Engine/Events/Event.h"
+#include "Engine/Events/WindowEvent.h"
+#include "Engine/Events/KeyboardEvent.h"
+#include "Engine/Events/MouseEvent.h"
 
 #include <glad/glad.h>
 
@@ -37,6 +39,28 @@ namespace Engine
 			auto data = (WindowData *)glfwGetWindowUserPointer(window);
 			WindowCloseEvent event;
 			data->eventCallback(event);
+		});
+
+		glfwSetKeyCallback(m_windowData.windowHandle, [](GLFWwindow* window, int key, int scancode, int action, int mods)
+		{
+			auto data = (WindowData*)glfwGetWindowUserPointer(window);
+
+			switch (action)
+			{
+				case GLFW_PRESS:
+				{
+					KeyPressedEvent event(key);
+					data->eventCallback(event);
+					break;
+				}
+
+				case GLFW_RELEASE:
+				{
+					KeyReleasedEvent event(key);
+					data->eventCallback(event);
+					break;
+				}
+			}
 		});
 	}
 

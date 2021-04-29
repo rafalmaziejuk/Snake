@@ -10,6 +10,9 @@ namespace Engine
 		MouseButtonPressed, MouseButtonReleased, MouseMoved
 	};
 
+#define EVENT_CLASS_TYPE(type)	static EventType get_static_type(void) { return EventType::type; } \
+								virtual EventType get_event_type(void) const override { return get_static_type(); }
+
 	class Event
 	{
 	public:
@@ -44,12 +47,4 @@ namespace Engine
 		}
 	};
 
-	class WindowCloseEvent : public Event
-	{
-	public:
-		WindowCloseEvent() = default;
-
-		static EventType get_static_type(void) { return EventType::WindowClose; }
-		virtual EventType get_event_type(void) const override { return get_static_type(); }
-	};
 }

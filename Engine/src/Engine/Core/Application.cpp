@@ -1,6 +1,7 @@
 #include "Engine/Core/Core.h"
 #include "Engine/Core/Application.h"
 #include "Engine/Core/EngineAssert.h"
+#include "Engine/Events/WindowEvent.h"
 
 #include "Engine/Graphics/Renderer.h"
 #include "Engine/ImGui/ImGuiRenderer.h"
@@ -57,6 +58,7 @@ namespace Engine
 			timeSinceLastUpdate = time;
 
 			on_update(timestep);
+			on_app_event()
 
 			Renderer::clear();
 

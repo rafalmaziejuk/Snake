@@ -1,12 +1,12 @@
 #pragma once
 
 #include "Engine/Core/Window.h"
-#include "Engine/Events/Event.h"
 
 int main(void);
 
 namespace Engine
 {
+	class WindowCloseEvent;
 
 	class Application
 	{
