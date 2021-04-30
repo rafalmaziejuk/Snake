@@ -43,8 +43,8 @@ Open `scripts` folder, run `sh genLinux.sh build` and then `sh genLinux.sh run`.
 
 # TODO
 * 2D batch renderer
-* Refactor Singleton classes (TextRenderer, InputManager)
-* Events handling
+* Refactor Singleton classes (TextRenderer, ~~InputManager~~)
+* ~~Events handling~~
 * Texture atlasses loading
 * Particles
 * Post-processing effects
