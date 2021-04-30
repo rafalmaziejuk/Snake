@@ -11,6 +11,7 @@ project "Snake"
 	{
 		"src/**.h",
 		"src/**.cpp"
+		"src/**.inl"
 	}
 
 	includedirs

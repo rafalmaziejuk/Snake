@@ -1,12 +1,9 @@
 #pragma once
 
 #include "Snake.h"
-#include "../../Graphics/Sprite.h"
-#include "../../Graphics/TextRenderer.h"
 
-#include <memory>
-
-class InputManager;
+#include <Engine/Graphics/Sprite.h>
+#include <Engine/Graphics/TextRenderer.h>
 
 class World
 {
@@ -14,11 +11,10 @@ private:
 	static const float ROTATION_VELOCITY;
 
 private:
-	Sprite m_background;
+	Engine::Sprite m_background;
 
 private:
-	InputManager &m_inputManager;
-	TextRenderer m_textRenderer;
+	Engine::TextRenderer m_textRenderer;
 
 private:
 	uint16_t m_windowWidth;
@@ -32,7 +28,7 @@ private:
 public:
 	World(uint16_t windowWidth, uint16_t windowHeight);
 
-	void draw(void) const;
+	void render(void) const;
 	void update(float timestep);
 	void handle_input(void);
 

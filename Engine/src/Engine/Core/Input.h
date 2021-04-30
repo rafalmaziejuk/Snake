@@ -1,9 +1,9 @@
 #pragma once
 
-#include <glm/vec2.hpp>
-
 #include "Engine/Core/KeyCodes.h"
 #include "Engine/Core/MouseCodes.h"
+
+#include <glm/vec2.hpp>
 
 namespace Engine
 {

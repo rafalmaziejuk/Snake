@@ -1,19 +1,16 @@
 #include "MenuState.h"
-#include "../../Utils/InputManager.h"
-#include "../../Graphics/Texture.h"
-#include "../../Graphics/Renderer.h"
 
-#include <GLFW/glfw3.h>
+#include <Engine/Graphics/Renderer.h>
+#include <Engine/Core/Input.h>
 
 const float MenuState::BG_SCROLL_VELOCITY = 15.0f;
 
 MenuState::MenuState(StateManager &stateManager, Context context) :
 	State(stateManager, context),
-	m_inputManager(InputManager::get_instance()),
-	m_playButton(Texture::create("assets/textures/play_button.png")),
-	m_exitButton(Texture::create("assets/textures/exit_button.png")),
-	m_overlay(Texture::create("assets/textures/menu.png")),
-	m_background(Texture::create("assets/textures/menu_bg.png")),
+	m_playButton(Engine::Texture::create("assets/textures/play_button.png")),
+	m_exitButton(Engine::Texture::create("assets/textures/exit_button.png")),
+	m_overlay(Engine::Texture::create("assets/textures/menu.png")),
+	m_background(Engine::Texture::create("assets/textures/menu_bg.png")),
 	m_bgHorizontalPos1(static_cast<float>(m_background->get_width()) / 2.0f),
 	m_bgHorizontalPos2(-static_cast<float>(m_background->get_width()) / 2.0f + 10.0f)
 {
@@ -41,13 +38,13 @@ MenuState::~MenuState(void)
 
 }
 
-void MenuState::draw(void) const
+void MenuState::render(void) const
 {
-	Renderer::draw({ m_bgHorizontalPos1, get_context().m_windowHeight / 2 }, m_background);
-	Renderer::draw({ m_bgHorizontalPos2, get_context().m_windowHeight / 2 }, m_background);
-	Renderer::draw({ get_context().m_windowWidth / 2, get_context().m_windowHeight / 2 }, m_overlay);
-	Renderer::draw(m_playButton);
-	Renderer::draw(m_exitButton);
+	Engine::Renderer::draw({ m_bgHorizontalPos1, get_context().m_windowHeight / 2 }, m_background);
+	Engine::Renderer::draw({ m_bgHorizontalPos2, get_context().m_windowHeight / 2 }, m_background);
+	Engine::Renderer::draw({ get_context().m_windowWidth / 2, get_context().m_windowHeight / 2 }, m_overlay);
+	Engine::Renderer::draw(m_playButton);
+	Engine::Renderer::draw(m_exitButton);
 }
 
 void MenuState::imgui_render(void) const
@@ -71,14 +68,14 @@ bool MenuState::update(float timestep)
 
 bool MenuState::handle_input(void)
 {
-	auto mousePosition = m_inputManager.get_mouse_position();
+	auto mousePosition = Engine::Input::get_mouse_position();
 	
 	//Play button
 	if (mousePosition.x >= 355.0f && mousePosition.x <= 445.0f &&
 		mousePosition.y >= 250.0f && mousePosition.y <= 345.0f)
 	{
 		m_playButton.set_scale(0.85f);
-		if (m_inputManager.is_key_pressed(GLFW_MOUSE_BUTTON_LEFT))
+		if (Engine::Input::is_mouse_button_pressed(Engine::Mouse::ButtonLeft))
 		{
 			pop_state();
 			push_state(ID::GAME_STATE);
@@ -92,7 +89,7 @@ bool MenuState::handle_input(void)
 		mousePosition.y >= 395.0f && mousePosition.y <= 495.0f)
 	{
 		m_exitButton.set_scale(0.85f);
-		if (m_inputManager.is_key_pressed(GLFW_MOUSE_BUTTON_LEFT))
+		if (Engine::Input::is_mouse_button_pressed(Engine::Mouse::ButtonLeft))
 			pop_state();
 	}
 	else

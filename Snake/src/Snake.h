@@ -1,12 +1,11 @@
 #pragma once
 
-#include "../../Graphics/Sprite.h"
+#include <Engine/Graphics/Sprite.h>
 
 #include <glm/glm.hpp>
 
 #include <vector>
 
-class SpriteRenderer;
 class Food;
 
 class Snake
@@ -19,13 +18,13 @@ private:
 	const uint8_t INIT_SNAKE_LENGTH = 10;
 
 private:
-	std::shared_ptr<Texture> m_segmentTexture;
+	std::shared_ptr<Engine::Texture> m_segmentTexture;
 
 	struct Segment
 	{
-		Sprite m_sprite;
+		Engine::Sprite m_sprite;
 
-		Segment(const Sprite &sprite) :
+		Segment(const Engine::Sprite &sprite) :
 			m_sprite(sprite)
 		{
 
@@ -62,7 +61,7 @@ public:
 		direction ? m_segments.begin()->rotate(ROTATION_SPEED) : m_segments.begin()->rotate(-ROTATION_SPEED);
 	}
 
-	void draw(void) const;
+	void render(void) const;
 	void update(float timestep);
 
 	bool check_collision(void) const;
@@ -73,12 +72,12 @@ public:
 class Food
 {
 private:
-	Sprite m_sprite;
+	Engine::Sprite m_sprite;
 
 public:
 	Food(void);
 
-	void draw(void) const;
+	void render(void) const;
 	void update(void);
 	void reset_position(const Snake &snake);
 

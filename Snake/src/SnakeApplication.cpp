@@ -8,9 +8,6 @@ namespace Engine
 
 	class SnakeApplication : public Application
 	{
-	private:
-
-
 	public:
 		SnakeApplication(void) :
 			Application("Snake")

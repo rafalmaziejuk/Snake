@@ -6,7 +6,7 @@ namespace Engine
 
 	bool Input::is_key_pressed(KeyCode key)
 	{
-		auto* window = static_cast<GLFWwindow*>(Application::get().get_window().get_window_handle());
+		auto *window = static_cast<GLFWwindow *>(Application::get().get_window().get_window_handle());
 		auto state = glfwGetKey(window, static_cast<int32_t>(key));
 		return state == GLFW_PRESS || state == GLFW_REPEAT;
 	}
@@ -20,11 +20,11 @@ namespace Engine
 
 	glm::vec2 Input::get_mouse_position(void)
 	{
-		auto* window = static_cast<GLFWwindow*>(Application::get().get_window().get_window_handle());
+		auto *window = static_cast<GLFWwindow *>(Application::get().get_window().get_window_handle());
 		double xpos, ypos;
 		glfwGetCursorPos(window, &xpos, &ypos);
 
-		return { (float)xpos, (float)ypos };
+		return { static_cast<float>(xpos), static_cast<float>(ypos) };
 	}
 
 }

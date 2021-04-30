@@ -1,9 +1,7 @@
 #include "World.h"
-#include "../../Utils/InputManager.h"
-#include "../../Graphics/Texture.h"
-#include "../../Graphics/Renderer.h"
 
-#include <GLFW/glfw3.h>
+#include <Engine/Graphics/Renderer.h>
+#include <Engine/Core/Input.h>
 
 #include <sstream>
 
@@ -11,11 +9,10 @@ const float World::ROTATION_VELOCITY = 0.5f;
 uint16_t playerScore;
 
 World::World(uint16_t windowWidth, uint16_t windowHeight) :
-	m_inputManager(InputManager::get_instance()),
 	m_textRenderer(windowWidth, windowHeight),
 	m_windowWidth(windowWidth),
 	m_windowHeight(windowHeight),
-	m_background(Texture::create("assets/textures/game_bg.png")),
+	m_background(Engine::Texture::create("assets/textures/game_bg.png")),
 	m_snake(windowWidth, windowHeight),
 	m_food(),
 	m_isPlayerAlive(true)
@@ -27,11 +24,11 @@ World::World(uint16_t windowWidth, uint16_t windowHeight) :
 	playerScore = 0;
 }
 
-void World::draw(void) const
+void World::render(void) const
 {
-	Renderer::draw(m_background);
-	m_snake.draw();
-	m_food.draw();
+	Engine::Renderer::draw(m_background);
+	m_snake.render();
+	m_food.render();
 
 	std::stringstream ss;
 	if (playerScore < 10)
@@ -64,15 +61,9 @@ void World::update(float timestep)
 
 void World::handle_input(void)
 {
-	if (m_inputManager.is_key_pressed(GLFW_KEY_A))
-	{
+	if (Engine::Input::is_key_pressed(Engine::Key::A))
 		m_snake.change_direction(false);
-		m_inputManager.key_process(GLFW_KEY_A);
-	}
 
-	if (m_inputManager.is_key_pressed(GLFW_KEY_D))
-	{
+	if (Engine::Input::is_key_pressed(Engine::Key::D))
 		m_snake.change_direction(true);
-		m_inputManager.key_process(GLFW_KEY_D);
-	}
 }

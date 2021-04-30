@@ -1,5 +1,5 @@
 #include "State.h"
-#include "../Utils/StateManager.h"
+#include "StateManager.h"
 
 State::State(StateManager &stateManager, Context context) :
 	m_stateManager(&stateManager),

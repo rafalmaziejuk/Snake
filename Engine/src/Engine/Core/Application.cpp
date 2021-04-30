@@ -29,6 +29,7 @@ namespace Engine
 	Application::~Application(void)
 	{
 		Renderer::shutdown();
+		ImGuiRenderer::shutdown();
 
 		m_layer->on_detach();
 		delete m_layer;

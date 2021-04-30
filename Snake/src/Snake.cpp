@@ -1,14 +1,14 @@
 #include "Snake.h"
 
-#include "../../Graphics/Renderer.h"
-#include "../../Graphics/Texture.h"
+#include <Engine/Graphics/Renderer.h>
 
+//temp
 #include <GLFW/glfw3.h>
 
 Snake::Snake(uint16_t windowWidth, uint16_t windowHeight) :
 	m_windowWidth(windowWidth),
 	m_windowHeight(windowHeight),
-	m_segmentTexture(Texture::create("assets/textures/snake_segment.png"))
+	m_segmentTexture(Engine::Texture::create("assets/textures/snake_segment.png"))
 {
 	for (uint8_t i = 0; i < INIT_SNAKE_LENGTH; i++)
 		add_segment({ windowWidth / 2, windowHeight / 2 });
@@ -16,14 +16,14 @@ Snake::Snake(uint16_t windowWidth, uint16_t windowHeight) :
 
 void Snake::add_segment(const glm::vec2 &position)
 {
-	Sprite sprite(m_segmentTexture, position, { 32.0f, 32.0f });
+	Engine::Sprite sprite(m_segmentTexture, position, { 32.0f, 32.0f });
 	m_segments.push_back(sprite);
 }
 
-void Snake::draw(void) const
+void Snake::render(void) const
 {
 	for (const auto &segment : m_segments)
-		Renderer::draw(segment.m_sprite);
+		Engine::Renderer::draw(segment.m_sprite);
 }
 
 void Snake::update(float timestep)
@@ -90,14 +90,14 @@ void Snake::extend(void)
 }
 
 Food::Food(void) :
-	m_sprite(Texture::create("assets/textures/food.png"))
+	m_sprite(Engine::Texture::create("assets/textures/food.png"))
 {
 	m_sprite.set_size({ 32.0f, 32.0f });
 }
 
-void Food::draw(void) const
+void Food::render(void) const
 {
-	Renderer::draw(m_sprite);
+	Engine::Renderer::draw(m_sprite);
 }
 
 void Food::update(void)

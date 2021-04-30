@@ -1,5 +1,4 @@
 #include "GameState.h"
-#include "../../Utils/ImGui/ImGuiRenderer.h"
 
 GameState::GameState(StateManager &stateManager, Context context) :
 	State(stateManager, context),
@@ -12,16 +11,14 @@ GameState::~GameState(void)
 
 }
 
-void GameState::draw(void) const
+void GameState::render(void) const
 {
-	m_world.draw();
+	m_world.render();
 }
 
 void GameState::imgui_render(void) const
 {
-	/*ImGui::Begin("FPS");
-	ImGui::Text("%.3f ms / %.1f FPS", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
-	ImGui::End();*/
+
 }
 
 bool GameState::update(float timestep)

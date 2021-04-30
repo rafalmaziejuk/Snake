@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../States/State.h"
-#include "../States/StateIdentifiers.h"
+#include "State.h"
+#include "StateIdentifiers.h"
 
 #include <functional>
 #include <memory>
@@ -50,7 +50,7 @@ public:
 	template <typename T1, typename T2>
 	inline void register_state(ID stateID, T2 t2);
 
-	void draw(void);
+	void render(void);
 	void imgui_render(void);
 	void update(float timestep);
 	void handle_input(void);

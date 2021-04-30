@@ -83,9 +83,9 @@ namespace Engine
 	void Renderer::draw(const Sprite &sprite)
 	{
 		glm::mat4 model =
-			glm::translate(glm::mat4(1.0f), glm::vec3(sprite.get_position(), 0.0f)) *
-			glm::rotate(glm::mat4(1.0f), glm::radians(sprite.get_angle()), glm::vec3(0.0f, 0.0f, 1.0f)) *
-			glm::scale(glm::mat4(1.0f), glm::vec3(sprite.get_size(), 1.0f));
+		glm::translate(glm::mat4(1.0f), glm::vec3(sprite.get_position(), 0.0f)) *
+		glm::rotate(glm::mat4(1.0f), glm::radians(sprite.get_angle()), glm::vec3(0.0f, 0.0f, 1.0f)) *
+		glm::scale(glm::mat4(1.0f), glm::vec3(sprite.get_size(), 1.0f));
 
 		rendererData.m_spriteShader->bind();
 		rendererData.m_spriteShader->set_mat4("model", model);
@@ -100,8 +100,8 @@ namespace Engine
 	void Renderer::draw(const glm::vec2 &position, const std::shared_ptr<Texture> &texture)
 	{
 		glm::mat4 model =
-			glm::translate(glm::mat4(1.0f), glm::vec3(position, 0.0f)) *
-			glm::scale(glm::mat4(1.0f), glm::vec3(texture->get_size(), 1.0f));
+		glm::translate(glm::mat4(1.0f), glm::vec3(position, 0.0f)) *
+		glm::scale(glm::mat4(1.0f), glm::vec3(texture->get_size(), 1.0f));
 
 		rendererData.m_spriteShader->bind();
 		rendererData.m_spriteShader->set_mat4("model", model);
