@@ -18,6 +18,15 @@ namespace Engine
 		float m_angle;
 
 	public:
+		Sprite(void) :
+			m_texture(),
+			m_position({ 0, 0 }), 
+			m_size({ 0, 0 }),
+			m_angle(0.0f)
+		{
+
+		}
+
 		Sprite(const std::shared_ptr<Texture> &texture) :
 			m_texture(texture),
 			m_position(),

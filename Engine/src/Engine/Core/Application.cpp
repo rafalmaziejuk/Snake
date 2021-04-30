@@ -2,6 +2,7 @@
 #include "Engine/Core/Application.h"
 #include "Engine/Core/EngineAssert.h"
 #include "Engine/Events/WindowEvent.h"
+#include "Engine/Core/Layer.h"
 
 #include "Engine/Graphics/Renderer.h"
 #include "Engine/ImGui/ImGuiRenderer.h"
@@ -16,7 +17,7 @@ namespace Engine
 		appInstance = this;
 
 		m_window = Window::create(name);
-		m_window->set_event_callback(BIND_EVENT(Application, on_event));
+		m_window->set_event_callback(EN_BIND_EVENT(Application::on_event));
 
 		Renderer::init(m_window->get_width(), m_window->get_height());
 		Renderer::set_viewport(m_window->get_width(), m_window->get_height());
@@ -28,6 +29,15 @@ namespace Engine
 	Application::~Application(void)
 	{
 		Renderer::shutdown();
+
+		m_layer->on_detach();
+		delete m_layer;
+	}
+
+	void Application::push_layer(Layer *layer)
+	{
+		m_layer = layer;
+		m_layer->on_attach();
 	}
 
     void Application::close(void)
@@ -38,7 +48,12 @@ namespace Engine
 	void Application::on_event(Event &e)
 	{
 		EventDispatcher dispatcher(e);
-		dispatcher.dispatch<WindowCloseEvent>(BIND_EVENT(Application, on_window_close));
+		dispatcher.dispatch<WindowCloseEvent>(EN_BIND_EVENT(Application::on_window_close));
+
+		if (e.handled)
+			return;
+
+		m_layer->on_event(e);
 	}
 
 	bool Application::on_window_close(WindowCloseEvent &e)
@@ -57,15 +72,14 @@ namespace Engine
 			float timestep = time - timeSinceLastUpdate;
 			timeSinceLastUpdate = time;
 
-			on_update(timestep);
-			on_app_event()
+			m_layer->on_update(timestep);
 
 			Renderer::clear();
 
-			on_render();
+			m_layer->on_render();
 
 			ImGuiRenderer::begin();
-			on_imgui_render();
+			m_layer->on_imgui_render();
 			ImGuiRenderer::end();
 
 			m_window->update();

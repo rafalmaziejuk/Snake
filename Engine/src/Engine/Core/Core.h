@@ -1,3 +1,3 @@
 #pragma once
 
-#define BIND_EVENT(type, x) std::bind(&type::x, this, std::placeholders::_1)
+#define EN_BIND_EVENT(x) std::bind(&x, this, std::placeholders::_1)

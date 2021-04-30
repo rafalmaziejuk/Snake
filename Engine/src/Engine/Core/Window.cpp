@@ -62,6 +62,27 @@ namespace Engine
 				}
 			}
 		});
+
+		glfwSetMouseButtonCallback(m_windowData.windowHandle, [](GLFWwindow* window, int button, int action, int mods)
+		{
+			auto data = (WindowData*)glfwGetWindowUserPointer(window);
+
+			switch (action)
+			{
+				case GLFW_PRESS:
+				{
+					MouseButtonPressedEvent event(button);
+					data->eventCallback(event);
+					break;
+				}
+				case GLFW_RELEASE:
+				{
+					MouseButtonReleasedEvent event(button);
+					data->eventCallback(event);
+					break;
+				}
+			}
+		});
 	}
 
 	Window::~Window(void)

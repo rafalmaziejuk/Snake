@@ -1,7 +1,7 @@
 #include <Engine.h>
 #include <Engine/Core/main.h>
 
-#include <imgui.h>
+#include "GameLayer.h"
 
 namespace Engine
 {
@@ -15,25 +15,10 @@ namespace Engine
 		SnakeApplication(void) :
 			Application("Snake")
 		{
-
+			push_layer(new GameLayer());
 		}
 
 		virtual ~SnakeApplication(void)
-		{
-
-		}
-
-		virtual void on_update(float timestep) override
-		{ 
-
-		}
-
-		virtual void on_render(void) override
-		{
-
-		}
-
-		virtual void on_imgui_render(void) override
 		{
 
 		}
