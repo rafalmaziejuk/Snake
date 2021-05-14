@@ -1,5 +1,5 @@
 project "Snake"
-	kind "ConsoleApp"
+	kind "WindowedApp"
 	language "C++"
 	cppdialect "C++17"
 	staticruntime "on"
@@ -10,7 +10,7 @@ project "Snake"
 	files
 	{
 		"src/**.h",
-		"src/**.cpp"
+		"src/**.cpp",
 		"src/**.inl"
 	}
 
@@ -26,7 +26,11 @@ project "Snake"
 
 	links
 	{
-		"Engine"
+		"Engine",
+		"glfw",
+		"glad",
+		"imgui",
+		"freetype"
 	}
 
 	filter "system:windows"
@@ -34,6 +38,18 @@ project "Snake"
 
 	filter "system:linux"
 		systemversion "latest"
+		
+		linkoptions
+		{
+			"-std=c++17",
+			"-pthread",
+			"-lm",
+			"-Wl,--no-as-needed",
+			"-ldl",
+			"-lGL",
+			"-lXmu",
+			"-lX11"
+		}
 
 	filter "configurations:Debug"
 		defines "EN_DEBUG"
