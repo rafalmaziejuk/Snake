@@ -39,7 +39,7 @@ If you cloned the repository without `--recursive` option, use `git submodule up
 Open `scripts` folder and run `genWindows.bat` for Visual Studio 2019 project generation, launch *.sln file and build Solution.
 
 ### Linux
-Open `scripts` folder, run `sh genLinux.sh build` and then `sh genLinux.sh run`.
+Open `scripts` folder, run `./genLinux.sh build` and then `./genLinux.sh run`.
 
 # TODO
 * 2D batch renderer
