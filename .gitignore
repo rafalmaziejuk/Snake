@@ -1,14 +1,1 @@
-#Binaries
-**/bin/
-!vendor/premake
-bin-int/
-
-#Visual Studio files
-.vs/
-**.sln
-**.vcxproj
-**.vcxproj.filters
-**.vcxproj.user
-
-Makefile
-.vscode
+build/
