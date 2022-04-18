@@ -1,16 +1,12 @@
-[submodule "Engine/vendor/glfw"]
-	path = Engine/vendor/glfw
-	url = https://github.com/rafalmaziejuk/glfw.git
-	branch = master
-[submodule "Engine/vendor/glm"]
-	path = Engine/vendor/glm
+[submodule "third_party/freetype"]
+	path = third_party/freetype
+	url = https://github.com/freetype/freetype
+[submodule "third_party/glfw"]
+	path = third_party/glfw
+	url = https://github.com/glfw/glfw
+[submodule "third_party/glm"]
+	path = third_party/glm
 	url = https://github.com/g-truc/glm
-	branch = master
-[submodule "Engine/vendor/imgui"]
-	path = Engine/vendor/imgui
-	url = https://github.com/rafalmaziejuk/imgui.git
-	branch = master
-[submodule "Engine/vendor/freetype"]
-	path = Engine/vendor/freetype
-	url = https://github.com/rafalmaziejuk/freetype.git
-	branch = master
+[submodule "third_party/imgui/imgui"]
+	path = third_party/imgui/imgui
+	url = https://github.com/ocornut/imgui

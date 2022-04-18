@@ -4,8 +4,6 @@
 #include "Engine/Events/KeyboardEvent.h"
 #include "Engine/Events/MouseEvent.h"
 
-#include <glad/glad.h>
-
 namespace Engine
 {
 	Window::Window(const WindowData &data) :

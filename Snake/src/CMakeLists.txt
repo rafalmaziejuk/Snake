@@ -1,0 +1,22 @@
+set(SNAKE_SOURCES
+    ${CMAKE_CURRENT_SOURCE_DIR}/GameLayer.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/GameLayer.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/GameoverState.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/GameoverState.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/GameState.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/GameState.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/MenuState.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/MenuState.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/Snake.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/Snake.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/SnakeApplication.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/State.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/State.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/StateIdentifiers.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/StateManager.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/StateManager.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/World.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/World.h
+)
+
+target_sources(${SNAKE_PRJ_NAME} PRIVATE ${SNAKE_SOURCES})

@@ -13,8 +13,8 @@ class Snake
 private:
 	const float COLLISION_DISTANCE = 16.0f;
 	const float SPACING = 20.0f;
-	const float VELOCITY = 5.0f;
-	const float ROTATION_SPEED = 5.0f;
+	const float VELOCITY = 2.0f;
+	const float ROTATION_SPEED = 2.0f;
 	const uint8_t INIT_SNAKE_LENGTH = 10;
 
 private:
